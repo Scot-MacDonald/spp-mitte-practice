@@ -36,9 +36,9 @@
     COPY package.json pnpm-lock.yaml ./
     RUN pnpm install --prod --frozen-lockfile
     
-    # Copy build output from previous stage
-    COPY --from=build /app/.next ./.next
-    COPY --from=build /app/public ./public
-    COPY --from=build /app/next.config.js ./
-    COPY --from=
+   # Copy build output from previous stage
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/public ./public
+COPY --from=build /app/next.config.js ./
+COPY --from=build /app/node_modules ./node_modules
     
