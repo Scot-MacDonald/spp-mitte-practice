@@ -1,12 +1,12 @@
 # ------------------------------
-# Base image (Debian, not Alpine!)
+# Base image (Debian)
 # ------------------------------
     FROM node:20 AS base
     RUN npm install -g pnpm
     WORKDIR /app
     
     # ------------------------------
-    # Install dependencies (cached)
+    # Install dependencies
     # ------------------------------
     FROM base AS deps
     COPY package.json pnpm-lock.yaml ./
@@ -19,7 +19,7 @@
     COPY --from=deps /app/node_modules ./node_modules
     COPY . .
     
-    # Allow sharp / esbuild / other native modules to build correctly
+    # Allow native builds for sharp/esbuild
     RUN pnpm approve-builds
     
     # Build Next.js + Payload
@@ -32,15 +32,13 @@
     ENV NODE_ENV=production
     WORKDIR /app
     
-    # Install *only* production dependencies
-    COPY package.json pnpm-lock.yaml ./
-    RUN pnpm install --prod --frozen-lockfile
+    # Copy entire node_modules from build (already built native modules)
+    COPY --from=build /app/node_modules ./node_modules
     
     # Copy build output
     COPY --from=build /app/.next ./.next
     COPY --from=build /app/public ./public
     COPY --from=build /app/next.config.js ./
-    COPY --from=build /app/node_modules ./node_modules
     
     # Expose port & default command
     EXPOSE 3000
