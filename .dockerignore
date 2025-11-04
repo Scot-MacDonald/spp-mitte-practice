@@ -1,0 +1,31 @@
+# Prevent copying local node_modules into container
+
+node_modules
+.pnpm-store
+
+# Prevent copying Next.js build artifacts
+
+.next
+dist
+media
+
+# OS / editor files
+
+.DS_Store
+.vscode
+\*.log
+
+# Environment files (handled in Coolify instead)
+
+.env
+.env.local
+.env.production
+.env.development
+
+# Payload database dumps
+
+dataDump/
+
+# Vercel config
+
+.vercel

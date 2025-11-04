@@ -1,34 +1,50 @@
-# ---- Base Image ----
+# ------------------------------
+# Base image
+# ------------------------------
     FROM node:20-alpine AS base
     RUN npm install -g pnpm
     WORKDIR /app
     
-    # ---- Install Dependencies (cached separately) ----
+    # ------------------------------
+    # Install dependencies (cached)
+    # ------------------------------
     FROM base AS deps
     COPY package.json pnpm-lock.yaml ./
     RUN pnpm install --frozen-lockfile
     
-    # ---- Build Stage ----
+    # ------------------------------
+    # Build application
+    # ------------------------------
     FROM base AS build
     COPY --from=deps /app/node_modules ./node_modules
     COPY . .
+    
+    # Allow sharp / esbuild / etc to build correctly
+    RUN pnpm approve-builds
+    
+    # Build Next.js + Payload
     RUN pnpm build
     
-    # ---- Production Runtime ----
+    # ------------------------------
+    # Production runtime
+    # ------------------------------
     FROM base AS runtime
     ENV NODE_ENV=production
     WORKDIR /app
     
-    # Only install prod dependencies
+    # Install *only* production deps
     COPY package.json pnpm-lock.yaml ./
     RUN pnpm install --prod --frozen-lockfile
     
-    # Copy built next app
+    # Copy build output from previous stage
     COPY --from=build /app/.next ./.next
     COPY --from=build /app/public ./public
     COPY --from=build /app/next.config.js ./
     COPY --from=build /app/node_modules ./node_modules
     
+    # Expose server port
     EXPOSE 3000
+    
+    # Start Next.js (which includes Payload routes)
     CMD ["pnpm", "start"]
     
