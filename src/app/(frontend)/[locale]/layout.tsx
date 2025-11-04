@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-
 import { cn } from 'src/utilities/cn'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
@@ -19,8 +18,8 @@ import './globals.css'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
-import { notFound } from 'next/navigation'
 import localization from '@/i18n/localization'
+import { notFound } from 'next/navigation'
 
 type Args = {
   children: React.ReactNode
@@ -32,15 +31,22 @@ type Args = {
 export default async function RootLayout({ children, params }: Args) {
   const { locale } = await params
   const currentLocale = localization.locales.find((loc) => loc.code === locale)
-  const direction = currentLocale?.rtl ? 'rtl' : 'ltr'
 
-  if (!routing.locales.includes(locale as any)) {
+  // If locale not in your routing config, show 404
+  if (!routing.locales.includes(locale as any) || !currentLocale) {
     notFound()
   }
+
+  // Set the request locale for next-intl
   setRequestLocale(locale)
 
+  // Draft mode and messages
   const { isEnabled } = await draftMode()
   const messages = await getMessages()
+
+  // RTL handling (future-proof)
+  const rtlLocales = ['ar', 'he', 'fa', 'ur'] // Add any RTL languages here later
+  const direction = rtlLocales.includes(locale) ? 'rtl' : 'ltr'
 
   return (
     <html

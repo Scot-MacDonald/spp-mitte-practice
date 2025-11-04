@@ -1,29 +1,34 @@
-FROM node:18.8-alpine as base
-
-RUN npm install -g pnpm
-ENV PNPM_HOME=/home/node/.pnpm-store
-ENV PATH=$PNPM_HOME:$PATH
-
-FROM base as builder
-
-WORKDIR /home/node/app
-COPY package*.json ./
-COPY pnpm-lock.yaml ./
-
-RUN pnpm install
-
-COPY . .
-RUN pnpm build
-
-FROM base as runtime
-
-ENV NODE_ENV=production
-
-WORKDIR /home/node/app
-COPY package*.json  ./
-COPY pnpm-lock.yaml ./
-RUN pnpm install --prod
-
-EXPOSE 3000
-
-CMD ["node", "dist/server.js"]
+# ---- Base Image ----
+    FROM node:20-alpine AS base
+    RUN npm install -g pnpm
+    WORKDIR /app
+    
+    # ---- Install Dependencies (cached separately) ----
+    FROM base AS deps
+    COPY package.json pnpm-lock.yaml ./
+    RUN pnpm install --frozen-lockfile
+    
+    # ---- Build Stage ----
+    FROM base AS build
+    COPY --from=deps /app/node_modules ./node_modules
+    COPY . .
+    RUN pnpm build
+    
+    # ---- Production Runtime ----
+    FROM base AS runtime
+    ENV NODE_ENV=production
+    WORKDIR /app
+    
+    # Only install prod dependencies
+    COPY package.json pnpm-lock.yaml ./
+    RUN pnpm install --prod --frozen-lockfile
+    
+    # Copy built next app
+    COPY --from=build /app/.next ./.next
+    COPY --from=build /app/public ./public
+    COPY --from=build /app/next.config.js ./
+    COPY --from=build /app/node_modules ./node_modules
+    
+    EXPOSE 3000
+    CMD ["pnpm", "start"]
+    
