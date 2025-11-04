@@ -1,7 +1,7 @@
 # ------------------------------
-# Base image
+# Base image (Debian, not Alpine!)
 # ------------------------------
-    FROM node:20-alpine AS base
+    FROM node:20 AS base
     RUN npm install -g pnpm
     WORKDIR /app
     
@@ -40,11 +40,5 @@
     COPY --from=build /app/.next ./.next
     COPY --from=build /app/public ./public
     COPY --from=build /app/next.config.js ./
-    COPY --from=build /app/node_modules ./node_modules
-    
-    # Expose server port
-    EXPOSE 3000
-    
-    # Start Next.js (which includes Payload routes)
-    CMD ["pnpm", "start"]
+    COPY --from=
     
