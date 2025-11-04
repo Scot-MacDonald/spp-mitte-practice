@@ -1,7 +1,7 @@
 # ------------------------------
-# Base image (Debian, not Alpine!)
+# Base image
 # ------------------------------
-    FROM node:20 AS base
+    FROM node:20-alpine AS base
     RUN npm install -g pnpm
     WORKDIR /app
     
@@ -28,17 +28,22 @@
     # ------------------------------
     # Production runtime
     # ------------------------------
-    FROM base AS runtime
+    FROM node:20-alpine AS runtime
     ENV NODE_ENV=production
     WORKDIR /app
     
-    # Install *only* production deps
+    # Install only production deps
     COPY package.json pnpm-lock.yaml ./
+    RUN npm install -g pnpm
     RUN pnpm install --prod --frozen-lockfile
     
-   # Copy build output from previous stage
-COPY --from=build /app/.next ./.next
-COPY --from=build /app/public ./public
-COPY --from=build /app/next.config.js ./
-COPY --from=build /app/node_modules ./node_modules
+    # Copy build output from build stage
+    COPY --from=build /app/.next ./.next
+    COPY --from=build /app/public ./public
+    COPY --from=build /app/next.config.js ./
+    COPY --from=build /app/node_modules ./node_modules
+    
+    EXPOSE 3000
+    
+    CMD ["pnpm", "start"]
     
