@@ -65,8 +65,7 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
 
   return generateMeta({ doc: page })
 }
-
-const queryPage = cache(async ({ locale, slug }: { locale: TypedLocale; slug: string }) => {
+const queryPage = async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
@@ -85,4 +84,4 @@ const queryPage = cache(async ({ locale, slug }: { locale: TypedLocale; slug: st
   })
 
   return result.docs?.[0] || null
-})
+}

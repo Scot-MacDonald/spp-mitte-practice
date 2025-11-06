@@ -27,11 +27,11 @@ export async function generateStaticParams() {
 
   return pages.docs
     ?.filter((doc) => doc.slug !== 'home')
-    .flatMap(({ slug }) => 
-      routing.locales.map(locale => ({
+    .flatMap(({ slug }) =>
+      routing.locales.map((locale) => ({
         slug,
-        locale
-      }))
+        locale,
+      })),
     )
 }
 
@@ -86,7 +86,7 @@ export async function generateMetadata({ params: paramsPromise }): Promise<Metad
   return generateMeta({ doc: page })
 }
 
-const queryPage = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
+const queryPage = async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
@@ -105,4 +105,4 @@ const queryPage = cache(async ({ slug, locale }: { slug: string; locale: TypedLo
   })
 
   return result.docs?.[0] || null
-})
+}
