@@ -1,12 +1,11 @@
+// pages/[slug]/page.tsx
 export const dynamic = 'force-dynamic'
 
 import { Metadata } from 'next'
-// import PageTemplate from './[slug]/page'
-
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
+import React from 'react'
 import { generateMeta } from '@/utilities/generateMeta'
 import { TypedLocale } from 'payload'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
@@ -17,24 +16,35 @@ import { RenderHero } from '@/heros/RenderHero'
 import PageClient from './[slug]/page.client'
 
 type Args = {
-  params: Promise<{
+  params: {
     slug?: string
     locale: TypedLocale
-  }>
+  }
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
-  const { slug = 'home', locale = 'en' } = await paramsPromise
+export default async function Page({ params }: Args) {
+  const { slug = 'home', locale = 'en' } = params
   const url = '/' + slug
 
-  let page: PageType | null
+  const payload = await getPayload({ config: configPromise })
+  const { isEnabled: draft } = await draftMode()
 
-  page = await queryPage({
-    slug,
+  const result = await payload.find({
+    collection: 'pages',
+    draft,
+    limit: 1,
+    overrideAccess: draft,
     locale,
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
   })
 
-  // Remove this code once your website is seeded
+  let page: PageType | null = result.docs?.[0] || null
+
+  // fallback for home if not seeded yet
   if (!page && slug === 'home') {
     page = homeStatic
   }
@@ -51,32 +61,24 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PayloadRedirects disableNotFound url={url} />
 
       <RenderHero {...hero} />
+      {/* RenderBlocks now always receives the fresh layout */}
       <RenderBlocks blocks={layout} locale={locale} />
     </article>
   )
 }
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
-  const { locale = 'en', slug = 'home' } = await params
-  const page = await queryPage({
-    locale,
-    slug,
-  })
-
-  return generateMeta({ doc: page })
-}
-
-const queryPage = cache(async ({ locale, slug }: { locale: TypedLocale; slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
+  const { locale = 'en', slug = 'home' } = params
 
   const payload = await getPayload({ config: configPromise })
+  const { isEnabled: draft } = await draftMode()
 
   const result = await payload.find({
     collection: 'pages',
     draft,
     limit: 1,
     overrideAccess: draft,
-    locale: locale,
+    locale,
     where: {
       slug: {
         equals: slug,
@@ -84,5 +86,7 @@ const queryPage = cache(async ({ locale, slug }: { locale: TypedLocale; slug: st
     },
   })
 
-  return result.docs?.[0] || null
-})
+  const page = result.docs?.[0] || null
+
+  return generateMeta({ doc: page })
+}
