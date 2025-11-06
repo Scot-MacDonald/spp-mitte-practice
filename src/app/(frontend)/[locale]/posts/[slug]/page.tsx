@@ -25,11 +25,11 @@ export async function generateStaticParams() {
     overrideAccess: false,
   })
 
-  return posts.docs.flatMap(({ slug }) => 
-    routing.locales.map(locale => ({
+  return posts.docs.flatMap(({ slug }) =>
+    routing.locales.map((locale) => ({
       slug,
-      locale
-    }))
+      locale,
+    })),
   )
 }
 
@@ -83,7 +83,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   return generateMeta({ doc: post })
 }
 
-const queryPost = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
+const queryPost = async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
@@ -105,4 +105,4 @@ const queryPost = cache(async ({ slug, locale }: { slug: string; locale: TypedLo
   })
 
   return result.docs?.[0] || null
-})
+}
