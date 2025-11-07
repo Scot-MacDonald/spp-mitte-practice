@@ -40,7 +40,7 @@ importers:
         version: 3.14.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.14.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
       '@payloadcms/richtext-lexical':
         specifier: latest
-        version: 3.14.0(3gepnvqodnxx2bscidvj24r5qm)
+        version: 3.14.0(de76c2b24e59ee016a908980baf4d8ea)
       '@payloadcms/ui':
         specifier: latest
         version: 3.14.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.14.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
@@ -89,6 +89,9 @@ importers:
       payload-admin-bar:
         specifier: ^1.0.6
         version: 1.0.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      payload-lexical-typography:
+        specifier: ^0.5.2
+        version: 0.5.2(@payloadcms/richtext-lexical@3.14.0(de76c2b24e59ee016a908980baf4d8ea))(@payloadcms/ui@3.14.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.14.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       prism-react-renderer:
         specifier: ^2.3.1
         version: 2.4.1(react@19.0.0)
@@ -852,6 +855,9 @@ packages:
   '@lexical/clipboard@0.20.0':
     resolution: {integrity: sha512-oHmb9kSVHjeFCd2q8VrEXW22doUHMJ6cGXqo7Ican7Ljl4/9OgRWr+cq55yntoSaJfCrRYkTiZCLDejF2ciSiA==}
 
+  '@lexical/clipboard@0.25.0':
+    resolution: {integrity: sha512-z0Dx6fDSLfbfK/LsfjkFbOTO87kHXQ6FNi8eCvVHtMLnME91kHTaotIalEdlS69Hw6032AThnEqeN5rAB24BlQ==}
+
   '@lexical/code@0.20.0':
     resolution: {integrity: sha512-zFsVGuzIn4CQxEnlW4AG/Hq6cyATVZ4fZTxozE/f5oK4vDPvnY/goRxrzSuAMX73A/HRX3kTEzMDcm4taRM3Mg==}
 
@@ -876,11 +882,17 @@ packages:
   '@lexical/html@0.20.0':
     resolution: {integrity: sha512-ob7QHkEv+mhaZjlurDj90UmEyN9G4rzBPR5QV42PLnu1qMSviMEdI5V3a5/A5aFf/FDDQ+0GAgWBFnA/MEDczQ==}
 
+  '@lexical/html@0.25.0':
+    resolution: {integrity: sha512-bjO5RbMpyFw4H6kCgYcdAlxzhoF1tjtRZ1w0MxSHReLg9wqNaeg4uNwdW+uVMbxRv+cYqaO0To66qMAcND6tiQ==}
+
   '@lexical/link@0.20.0':
     resolution: {integrity: sha512-zicDcfgRZPRFZ8WOZv5er0Aqkde+i7QoFVkLQD4dNLLORjoMSJOISJH6VEdjBl3k7QJTxbfrt+xT5d/ZsAN5GA==}
 
   '@lexical/list@0.20.0':
     resolution: {integrity: sha512-ufSse8ui3ooUe0HA/yF/9STrG8wYhIDLMRhELOw80GFCkPJaxs6yRvjfmJooH5IC88rpUJ5XXFFiZKfGxEZLEw==}
+
+  '@lexical/list@0.25.0':
+    resolution: {integrity: sha512-hAEcNuE9WxDHJGUcwkTN+4sGn1/j5/wBqkuaYrBrhf7vCHeKUAu7er7T7Gdfj1HPfjqZm6YxdqFF4LYqejwuRg==}
 
   '@lexical/mark@0.20.0':
     resolution: {integrity: sha512-1P2izmkgZ4VDp+49rWO1KfWivL5aA30y5kkYbFZ/CS05fgbO7ogMjLSajpz+RN/zzW79v3q4YfikrMgaD23InA==}
@@ -909,14 +921,23 @@ packages:
   '@lexical/selection@0.20.0':
     resolution: {integrity: sha512-YnkH5UCMNN/em95or/6uwAV31vcENh1Roj+JOg5KD+gJuA7VGdDCy0vZl/o0+1badXozeZ2VRxXNC6JSK7T4+A==}
 
+  '@lexical/selection@0.25.0':
+    resolution: {integrity: sha512-zbUflzM5bAER5JyDXNbaw4s9w5kp8Y2oYqpplkZhMXj8Ri3CUE5bQgt4vH6XbyKVl4hsJlVcZ3qmw3HJAcnWNQ==}
+
   '@lexical/table@0.20.0':
     resolution: {integrity: sha512-qHuK2rvQUoQDx62YpvJE3Ev4yK9kjRFo79IDBapxrhoXg/wCGQOjMBzVD3G5PWkhyl/GDnww80GwYjLloQLQzg==}
+
+  '@lexical/table@0.25.0':
+    resolution: {integrity: sha512-gWOvqyz1eGv504fxH7r0hZACYgxEldr5GlzS2GoII3S1OjGhEOjBkM5JNMzATFaxvfdUkL2ywbmBfhk5hI/spg==}
 
   '@lexical/text@0.20.0':
     resolution: {integrity: sha512-Fu64i5CIlEOlgucSdp9XFqB2XqoRsw4at76n93+6RF4+LgGDnu4nLXQVCVxNmLcGyh2WgczuTpnk5P2mHNAIUA==}
 
   '@lexical/utils@0.20.0':
     resolution: {integrity: sha512-sXIa2nowrNxY8VcjjuxZbJ/HovIql8bmInNaxBR03JAYfqMiL5I5/dYgjOQJV49NJnuR1uTY2GwVxVTXCTFUCw==}
+
+  '@lexical/utils@0.25.0':
+    resolution: {integrity: sha512-LAB/5OniVCDFMWh8zuKejqU4blAP5CEIpPXBtevbHROtbz3fqo/xqcHK3bGGP9w1UKYH0S6n+MA8Uv9hdVzf7w==}
 
   '@lexical/yjs@0.20.0':
     resolution: {integrity: sha512-TiHNhu2VkhXN69V+fXVS3xjOQ6aLnheQUGwOAhuFkDPL3VLCb0yl2Mgydpayn+3Grwii4ZBHcF7oCC84GiU5bw==}
@@ -3040,6 +3061,9 @@ packages:
   lexical@0.20.0:
     resolution: {integrity: sha512-lJEHLFACXqRf3u/VlIOu9T7MJ51O4la92uOBwiS9Sx+juDK3Nrru5Vgl1aUirV1qK8XEM3h6Org2HcrsrzZ3ZA==}
 
+  lexical@0.25.0:
+    resolution: {integrity: sha512-yZNfC+3Df/qGAbGD1Lsh+dkG0COJKGuDlT1e/t0qS9F1jaKvoz7Fm0tACQ3eRTbOYncJiaJveLiT9GADac2hrA==}
+
   lib0@0.2.99:
     resolution: {integrity: sha512-vwztYuUf1uf/1zQxfzRfO5yzfNKhTtgOByCruuiQQxWQXnPb8Itaube5ylofcV0oM0aKal9Mv+S1s1Ky0UYP1w==}
     engines: {node: '>=16'}
@@ -3498,6 +3522,14 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
+  payload-lexical-typography@0.5.2:
+    resolution: {integrity: sha512-ytc5KU6Ao6bHddzc/nzDAsf7P4OR1ONzrZz2vcv6sD+GDO8hDUde9ZvdFPE0YxWaHqSzejwZkF5JJKlHPbccjA==}
+    peerDependencies:
+      '@payloadcms/richtext-lexical': ^3.43.0
+      '@payloadcms/ui': ^3.43.0
+      react: ^19.0.0
+      react-dom: ^19.0.0
+
   payload@3.14.0:
     resolution: {integrity: sha512-frbWjci/VXcqBjrpG6cJBjtiJluXuBDrPghjPSdzRXpvR3REyijgSaGP7T32c9z2zR0Erauw67oWV9w0G1AlXw==}
     engines: {node: ^18.20.2 || >=20.9.0}
@@ -3674,6 +3706,12 @@ packages:
   rc@1.2.8:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
+
+  react-colorful@5.6.1:
+    resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   react-datepicker@7.5.0:
     resolution: {integrity: sha512-6MzeamV8cWSOcduwePHfGqY40acuGlS1cG//ePHT6bVbLxWyqngaStenfH03n1wbzOibFggF66kWaBTb1SbTtQ==}
@@ -5523,6 +5561,14 @@ snapshots:
       '@lexical/utils': 0.20.0
       lexical: 0.20.0
 
+  '@lexical/clipboard@0.25.0':
+    dependencies:
+      '@lexical/html': 0.25.0
+      '@lexical/list': 0.25.0
+      '@lexical/selection': 0.25.0
+      '@lexical/utils': 0.25.0
+      lexical: 0.25.0
+
   '@lexical/code@0.20.0':
     dependencies:
       '@lexical/utils': 0.20.0
@@ -5564,6 +5610,12 @@ snapshots:
       '@lexical/utils': 0.20.0
       lexical: 0.20.0
 
+  '@lexical/html@0.25.0':
+    dependencies:
+      '@lexical/selection': 0.25.0
+      '@lexical/utils': 0.25.0
+      lexical: 0.25.0
+
   '@lexical/link@0.20.0':
     dependencies:
       '@lexical/utils': 0.20.0
@@ -5573,6 +5625,11 @@ snapshots:
     dependencies:
       '@lexical/utils': 0.20.0
       lexical: 0.20.0
+
+  '@lexical/list@0.25.0':
+    dependencies:
+      '@lexical/utils': 0.25.0
+      lexical: 0.25.0
 
   '@lexical/mark@0.20.0':
     dependencies:
@@ -5642,11 +5699,21 @@ snapshots:
     dependencies:
       lexical: 0.20.0
 
+  '@lexical/selection@0.25.0':
+    dependencies:
+      lexical: 0.25.0
+
   '@lexical/table@0.20.0':
     dependencies:
       '@lexical/clipboard': 0.20.0
       '@lexical/utils': 0.20.0
       lexical: 0.20.0
+
+  '@lexical/table@0.25.0':
+    dependencies:
+      '@lexical/clipboard': 0.25.0
+      '@lexical/utils': 0.25.0
+      lexical: 0.25.0
 
   '@lexical/text@0.20.0':
     dependencies:
@@ -5658,6 +5725,13 @@ snapshots:
       '@lexical/selection': 0.20.0
       '@lexical/table': 0.20.0
       lexical: 0.20.0
+
+  '@lexical/utils@0.25.0':
+    dependencies:
+      '@lexical/list': 0.25.0
+      '@lexical/selection': 0.25.0
+      '@lexical/table': 0.25.0
+      lexical: 0.25.0
 
   '@lexical/yjs@0.20.0(yjs@13.6.21)':
     dependencies:
@@ -5871,20 +5945,20 @@ snapshots:
       - supports-color
       - typescript
 
-  '@payloadcms/richtext-lexical@3.14.0(3gepnvqodnxx2bscidvj24r5qm)':
+  '@payloadcms/richtext-lexical@3.14.0(de76c2b24e59ee016a908980baf4d8ea)':
     dependencies:
       '@faceless-ui/modal': 3.0.0-beta.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@faceless-ui/scroll-info': 2.0.0-beta.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@lexical/headless': 0.20.0
-      '@lexical/html': 0.20.0
+      '@lexical/html': 0.25.0
       '@lexical/link': 0.20.0
-      '@lexical/list': 0.20.0
+      '@lexical/list': 0.25.0
       '@lexical/mark': 0.20.0
       '@lexical/react': 0.20.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(yjs@13.6.21)
       '@lexical/rich-text': 0.20.0
-      '@lexical/selection': 0.20.0
-      '@lexical/table': 0.20.0
-      '@lexical/utils': 0.20.0
+      '@lexical/selection': 0.25.0
+      '@lexical/table': 0.25.0
+      '@lexical/utils': 0.25.0
       '@payloadcms/next': 3.14.0(@types/react@19.0.1)(graphql@16.10.0)(monaco-editor@0.52.2)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.14.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
       '@payloadcms/translations': 3.14.0
       '@payloadcms/ui': 3.14.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.14.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
@@ -5894,7 +5968,7 @@ snapshots:
       dequal: 2.0.3
       escape-html: 1.0.3
       jsox: 1.2.121
-      lexical: 0.20.0
+      lexical: 0.25.0
       mdast-util-from-markdown: 2.0.2
       mdast-util-mdx-jsx: 3.1.3
       micromark-extension-mdx-jsx: 3.0.1
@@ -8184,6 +8258,8 @@ snapshots:
 
   lexical@0.20.0: {}
 
+  lexical@0.25.0: {}
+
   lib0@0.2.99:
     dependencies:
       isomorphic.js: 0.2.5
@@ -8747,6 +8823,17 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
+  payload-lexical-typography@0.5.2(@payloadcms/richtext-lexical@3.14.0(de76c2b24e59ee016a908980baf4d8ea))(@payloadcms/ui@3.14.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.14.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      '@lexical/table': 0.25.0
+      '@payloadcms/richtext-lexical': 3.14.0(de76c2b24e59ee016a908980baf4d8ea)
+      '@payloadcms/ui': 3.14.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.14.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
+      '@types/escape-html': 1.0.4
+      escape-html: 1.0.3
+      react: 19.0.0
+      react-colorful: 5.6.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react-dom: 19.0.0(react@19.0.0)
+
   payload@3.14.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2):
     dependencies:
       '@monaco-editor/react': 4.6.0(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -8964,6 +9051,11 @@ snapshots:
       ini: 1.3.8
       minimist: 1.2.8
       strip-json-comments: 2.0.1
+
+  react-colorful@5.6.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   react-datepicker@7.5.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:

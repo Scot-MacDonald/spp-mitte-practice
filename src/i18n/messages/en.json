@@ -6,6 +6,7 @@
   "loading": "Loading, please wait...",
   "posts": "Posts",
   "post": "Post",
+  "doctors": "Doctors",
   "showing": "Showing",
   "of": "of",
   "search": "Search",
@@ -15,5 +16,31 @@
   "more-pages": "More pages",
   "auto": "Auto",
   "light": "Light",
-  "dark": "Dark"
+  "dark": "Dark",
+  "welcome": "Welcome to your specialist infectious disease practice, SPP-Mitte.",
+
+  "appointments": {
+    "line1": "Our appointments are managed",
+    "line2": "through the Doctolib app."
+  },
+  "Footer": {
+    "addressTitle": "SPP-Mitte",
+    "contactTitle": "Contact",
+    "infosTitle": "Info",
+    "openingHoursTitle": "Opening Hours",
+    "phone": "Phone",
+    "fax": "Fax"
+  },
+  "appointment": "Book appointment",
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "open": "Open now",
+  "closed": "Closed"
 }
