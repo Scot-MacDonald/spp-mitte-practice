@@ -25,7 +25,7 @@
     "@payloadcms/db-mongodb": "latest",
     "@payloadcms/email-resend": "^3.1.0",
     "@payloadcms/live-preview-react": "latest",
-    "@payloadcms/next": "latest",
+    "@payloadcms/next": "^3.47.0",
     "@payloadcms/payload-cloud": "latest",
     "@payloadcms/plugin-form-builder": "latest",
     "@payloadcms/plugin-nested-docs": "latest",

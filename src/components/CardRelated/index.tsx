@@ -75,7 +75,9 @@ export const CardRelated: React.FC<{
             </h3>
           </div>
         )}
-        {description && <div className="mt-2 text-sm">{description && <p>{sanitizedDescription}</p>}</div>}
+        {description && (
+          <div className="mt-2 text-sm">{description && <p>{sanitizedDescription}</p>}</div>
+        )}
       </div>
     </article>
   )

@@ -107,12 +107,69 @@ export default {
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
-            '--tw-prose-body': 'var(--text)',
-            '--tw-prose-headings': 'var(--text)',
+            color: '#000000',
             h1: {
-              fontSize: '4rem',
-              fontWeight: 'normal',
+              fontSize: '2.5rem',
+              fontWeight: '700',
               marginBottom: '0.25em',
+            },
+            h2: {
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              marginBottom: 0,
+            },
+            h3: {
+              fontSize: '1.25rem',
+              lineHeight: '1.75rem',
+              fontWeight: '600',
+              color: 'black',
+              marginBottom: '0',
+              '@media (max-width: 639px)': {
+                fontSize: '1rem',
+                lineHeight: '1.75rem',
+              },
+            },
+
+            p: {
+              fontSize: '1.1rem',
+              marginBottom: 0,
+              lineHeight: '1.5',
+              color: 'oklch(44.6% 0.03 256.802)',
+              '@media (max-width: 639px)': {
+                fontSize: '1rem', // smaller on sm and below
+              },
+            },
+          },
+        },
+
+        hero: {
+          css: {
+            h1: {
+              fontSize: '1.8rem',
+              fontWeight: '700',
+              marginBottom: '',
+              '@media (max-width: 639px)': {
+                fontSize: '1.1rem', // smaller on sm and below
+              },
+            },
+            h2: {
+              fontSize: '1.5rem',
+              fontWeight: '600',
+              marginBottom: '',
+              marginTop: '0rem',
+              '@media (max-width: 639px)': {
+                fontSize: '1rem', // smaller on sm and below
+              },
+            },
+            p: {
+              fontSize: '1.3rem',
+              fontWeight: '600',
+              marginBottom: '0',
+              marginTop: '0rem',
+              color: 'white',
+              '@media (max-width: 639px)': {
+                fontSize: '1rem', // smaller on sm and below
+              },
             },
           },
         },
