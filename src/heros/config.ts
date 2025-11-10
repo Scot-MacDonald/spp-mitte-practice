@@ -19,22 +19,10 @@ export const hero: Field = {
       defaultValue: 'lowImpact',
       label: 'Type',
       options: [
-        {
-          label: 'None',
-          value: 'none',
-        },
-        {
-          label: 'High Impact',
-          value: 'highImpact',
-        },
-        {
-          label: 'Medium Impact',
-          value: 'mediumImpact',
-        },
-        {
-          label: 'Low Impact',
-          value: 'lowImpact',
-        },
+        { label: 'None', value: 'none' },
+        { label: 'High Impact', value: 'highImpact' },
+        { label: 'Medium Impact', value: 'mediumImpact' },
+        { label: 'Low Impact', value: 'lowImpact' },
       ],
       required: true,
     },
@@ -43,14 +31,12 @@ export const hero: Field = {
       type: 'richText',
       localized: true,
       editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ]
-        },
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
       }),
       label: false,
     },
@@ -62,11 +48,44 @@ export const hero: Field = {
     {
       name: 'media',
       type: 'upload',
-      admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
-      },
+      label: 'Image',
       relationTo: 'media',
       required: true,
+      admin: {
+        condition: (_, { type } = {}) => type !== 'highImpact',
+      },
+      validate: (_, { siblingData }) => {
+        if (siblingData?.type !== 'highImpact') return true
+        return 'This field is required'
+      },
+    },
+    {
+      name: 'mediaDay',
+      type: 'upload',
+      label: 'Day Image',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        condition: (_, { type } = {}) => type === 'highImpact',
+      },
+      validate: (_, { siblingData }) => {
+        if (siblingData?.type === 'highImpact') return true
+        return 'This field is required'
+      },
+    },
+    {
+      name: 'mediaNight',
+      type: 'upload',
+      label: 'Night Image (after 20:00)',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        condition: (_, { type } = {}) => type === 'highImpact',
+      },
+      validate: (_, { siblingData }) => {
+        if (siblingData?.type === 'highImpact') return true
+        return 'This field is required'
+      },
     },
   ],
   label: false,
