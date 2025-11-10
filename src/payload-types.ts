@@ -179,6 +179,8 @@ export interface Page {
         }[]
       | null;
     media?: (string | null) | Media;
+    mediaDay?: (string | null) | Media;
+    mediaNight?: (string | null) | Media;
   };
   layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | TextBildBlock)[];
   meta?: {
@@ -881,6 +883,8 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        mediaDay?: T;
+        mediaNight?: T;
       };
   layout?:
     | T
