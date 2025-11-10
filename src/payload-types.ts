@@ -108,7 +108,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: 'en' | 'tr' | 'de';
+  locale: 'en' | 'de';
   user: User & {
     collection: 'users';
   };
@@ -182,7 +182,15 @@ export interface Page {
     mediaDay?: (string | null) | Media;
     mediaNight?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | TextBildBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | TextBildBlock
+    | NewsAndHoursBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -683,6 +691,45 @@ export interface TextBildBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NewsAndHoursBlock".
+ */
+export interface NewsAndHoursBlock {
+  latestInfosTitle?: string | null;
+  news: {
+    date: string;
+    summary?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    link?: string | null;
+    id?: string | null;
+  }[];
+  openingHours: {
+    title?: string | null;
+    hours: {
+      dayKey: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+      morning?: string | null;
+      afternoon?: string | null;
+      id?: string | null;
+    }[];
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'newsAndHours';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -895,6 +942,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         textBildBlock?: T | TextBildBlockSelect<T>;
+        newsAndHours?: T | NewsAndHoursBlockSelect<T>;
       };
   meta?:
     | T
@@ -1003,6 +1051,36 @@ export interface TextBildBlockSelect<T extends boolean = true> {
   title?: T;
   richText?: T;
   image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NewsAndHoursBlock_select".
+ */
+export interface NewsAndHoursBlockSelect<T extends boolean = true> {
+  latestInfosTitle?: T;
+  news?:
+    | T
+    | {
+        date?: T;
+        summary?: T;
+        link?: T;
+        id?: T;
+      };
+  openingHours?:
+    | T
+    | {
+        title?: T;
+        hours?:
+          | T
+          | {
+              dayKey?: T;
+              morning?: T;
+              afternoon?: T;
+              id?: T;
+            };
+      };
   id?: T;
   blockName?: T;
 }

@@ -9,6 +9,8 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TextBildBlock } from '@/blocks/TextBildBlock/Component'
+import { NewsAndHoursBlock } from '@/blocks/NewsAndHours/Component'
+
 import { TypedLocale } from 'payload'
 
 const blockComponents = {
@@ -18,6 +20,7 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   textBildBlock: TextBildBlock,
+  newsAndHours: NewsAndHoursBlock,
 }
 
 export const RenderBlocks: React.FC<{

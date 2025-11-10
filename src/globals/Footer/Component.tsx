@@ -2,7 +2,7 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import React from 'react'
 
 import type { Footer } from '@/payload-types'
-// import { OpeningHours } from '@/components/OpeningHours'
+import { OpeningHours } from '@/components/OpeningHours'
 import { CMSLink } from '@/components/Link'
 import { TypedLocale } from 'payload'
 import { getTranslations } from 'next-intl/server' // ✅ import this
@@ -48,7 +48,7 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
           {/* Column 4: Opening Hours */}
           <div className="flex flex-col gap-1 leading-snug w-full max-w-[500px] xl:col-span-2">
             <div className="font-semibold">{t('openingHoursTitle')}</div>
-            {/* <OpeningHours /> */}
+            <OpeningHours />
           </div>
         </div>
       </div>
