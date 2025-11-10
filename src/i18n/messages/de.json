@@ -1,0 +1,47 @@
+{
+  "date-published": "Veröffentlichungsdatum",
+  "author": "Autor",
+  "page-not-found": "Diese Seite konnte nicht gefunden werden.",
+  "go-home": "Zur Startseite",
+  "loading": "Lädt, bitte warten...",
+  "posts": "Beiträge",
+  "post": "Beitrag",
+  "doctors": "Ärzte",
+  "showing": "Anzeigen",
+  "of": "von",
+  "search": "Suche",
+  "dashboard": "Dashboard",
+  "previous": "Zurück",
+  "next": "Weiter",
+  "more-pages": "Weitere Seiten",
+  "auto": "Automatisch",
+  "light": "Hell",
+  "dark": "Dunkel",
+  "welcome": "Willkommen in der infektiologischen Schwerpunktpraxis Berlin Mitte",
+
+  "appointments": {
+    "line1": "Unsere Termine werden",
+    "line2": "über die Doctolib-App verwaltet."
+  },
+  "Footer": {
+    "addressTitle": "SPP-Mitte",
+    "contactTitle": "Kontakt",
+    "infosTitle": "Infos",
+    "openingHoursTitle": "Sprechzeiten",
+    "phone": "Tel.",
+    "fax": "Fax"
+  },
+  "appointment": "Termin buchen",
+
+  "days": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
+  },
+  "open": "Geöffnet",
+  "closed": "Geschlossen"
+}
