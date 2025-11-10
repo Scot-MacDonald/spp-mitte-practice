@@ -10,6 +10,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TextBildBlock } from '@/blocks/TextBildBlock/Component'
 import { NewsAndHoursBlock } from '@/blocks/NewsAndHours/Component'
+import MitgliedBlock from '@/blocks/Mitglied/Component'
 
 import { TypedLocale } from 'payload'
 
@@ -19,6 +20,7 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  mitglied: MitgliedBlock,
   textBildBlock: TextBildBlock,
   newsAndHours: NewsAndHoursBlock,
 }

@@ -9,6 +9,8 @@ import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import TextBildBlock from '../../blocks/TextBildBlock/config'
 import { NewsAndHours } from '@/blocks/NewsAndHours/config'
+import { Mitglied } from '@/blocks/Mitglied/config'
+
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -78,6 +80,7 @@ export const Pages: CollectionConfig = {
                 CallToAction,
                 Content,
                 MediaBlock,
+                Mitglied,
                 Archive,
                 FormBlock,
                 TextBildBlock,
