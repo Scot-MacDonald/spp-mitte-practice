@@ -3,29 +3,34 @@
 import React from 'react'
 
 import type { Header as HeaderType } from '@/payload-types'
-
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { LocaleSwitcher } from '@/components/LocaleSwitcher'
 import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
-import { SearchIcon } from 'lucide-react'
+
 import { useTranslations } from 'next-intl'
 
-export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
+interface HeaderNavProps {
+  header: HeaderType
+  onClickLink?: () => void
+}
+
+export const HeaderNav: React.FC<HeaderNavProps> = ({ header, onClickLink }) => {
   const navItems = header?.navItems || []
   const t = useTranslations()
 
   return (
-    <nav className="flex items-center gap-3">
+    <nav className="flex flex-col xl:flex-row gap-3 text-[16px] xl:items-center ">
       {navItems.map(({ link }, i) => {
-        return <CMSLink key={i} {...link} appearance="link" />
+        return (
+          <CMSLink
+            key={i}
+            {...link}
+            appearance="link"
+            className="text-[16px] onClick={onClickLink}"
+          />
+        )
       })}
       <LocaleSwitcher />
-      <ThemeSelector />
-      <Link href="/search">
-        <span className="sr-only">{t('search')}</span>
-        <SearchIcon className="w-5 text-primary" />
-      </Link>
     </nav>
   )
 }
