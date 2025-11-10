@@ -57,7 +57,7 @@ export default buildConfig({
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ['@/components/BeforeLogin'],
       // The `AfterDashboard` component renders "Seed" that you see after logging into your admin panel.
-      afterDashboard: ['@/components/AfterDashboard'],
+      // afterDashboard: ['@/components/AfterDashboard'],
     },
     importMap: {
       baseDir: path.resolve(dirname),
