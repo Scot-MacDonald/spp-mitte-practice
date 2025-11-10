@@ -186,6 +186,39 @@ export interface Page {
     | CallToActionBlock
     | ContentBlock
     | MediaBlock
+    | {
+        title: string;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        items: {
+          title: string;
+          description?:
+            | {
+                line: string;
+                id?: string | null;
+              }[]
+            | null;
+          url: string;
+          logo?: (string | null) | Media;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mitglied';
+      }
     | ArchiveBlock
     | FormBlock
     | TextBildBlock
@@ -939,6 +972,28 @@ export interface PagesSelect<T extends boolean = true> {
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
+        mitglied?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    description?:
+                      | T
+                      | {
+                          line?: T;
+                          id?: T;
+                        };
+                    url?: T;
+                    logo?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         textBildBlock?: T | TextBildBlockSelect<T>;

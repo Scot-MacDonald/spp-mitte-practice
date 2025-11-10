@@ -2,10 +2,12 @@ import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
-import React, { Fragment, JSX } from 'react'
 import { CMSLink } from '@/components/Link'
+import React, { Fragment, JSX } from 'react'
+
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
-import type { BannerBlock as BannerBlockProps } from '@/payload-types'
+
+import type { BannerBlock as BannerBlockProps, Page } from '@/payload-types'
 
 import {
   IS_BOLD,
@@ -16,7 +18,6 @@ import {
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
 } from './nodeFormat'
-import type { Page } from '@/payload-types'
 
 export type NodeTypes =
   | DefaultNodeTypes
@@ -31,130 +32,173 @@ type Props = {
   nodes: NodeTypes[]
 }
 
-// Type guard to check if a node has children
-function hasChildren(node: NodeTypes): node is NodeTypes & { children: NodeTypes[] } {
-  return 'children' in node && Array.isArray(node.children)
-}
-
 export function serializeLexical({ nodes }: Props): JSX.Element {
   return (
     <Fragment>
       {nodes?.map((node, index): JSX.Element | null => {
-        if (!node) return null
+        if (node == null) return null
 
-        // Text node
         if (node.type === 'text') {
-          let text: JSX.Element = <>{node.text}</>
+          let textNode: JSX.Element | string = node.text
 
-          if (node.format & IS_BOLD) text = <strong>{text}</strong>
-          if (node.format & IS_ITALIC) text = <em>{text}</em>
-          if (node.format & IS_STRIKETHROUGH)
-            text = <span style={{ textDecoration: 'line-through' }}>{text}</span>
-          if (node.format & IS_UNDERLINE)
-            text = <span style={{ textDecoration: 'underline' }}>{text}</span>
-          if (node.format & IS_CODE) text = <code>{node.text}</code>
-          if (node.format & IS_SUBSCRIPT) text = <sub>{text}</sub>
-          if (node.format & IS_SUPERSCRIPT) text = <sup>{text}</sup>
+          // ✅ Apply color style first (check both object and string format)
+          if (typeof node.style === 'object' && node.style !== null && 'color' in node.style) {
+            const color = (node.style as { color?: string })?.color
+            if (color) {
+              textNode = <span style={{ color }}>{textNode}</span>
+            }
+          } else if (typeof node.style === 'string') {
+            const colorMatch = node.style.match(/color:\s*(#[0-9A-Fa-f]{6}|[a-zA-Z]+)/)
+            const color = colorMatch?.[1]
+            if (color) {
+              textNode = <span style={{ color }}>{textNode}</span>
+            }
+          }
 
-          return <React.Fragment key={index}>{text}</React.Fragment>
+          // ✅ Then apply formatting tags around the color
+          if (node.format & IS_BOLD) {
+            textNode = <strong>{textNode}</strong>
+          }
+          if (node.format & IS_ITALIC) {
+            textNode = <em>{textNode}</em>
+          }
+          if (node.format & IS_STRIKETHROUGH) {
+            textNode = <span style={{ textDecoration: 'line-through' }}>{textNode}</span>
+          }
+          if (node.format & IS_UNDERLINE) {
+            textNode = <span style={{ textDecoration: 'underline' }}>{textNode}</span>
+          }
+          if (node.format & IS_CODE) {
+            textNode = <code>{node.text}</code>
+          }
+          if (node.format & IS_SUBSCRIPT) {
+            textNode = <sub>{textNode}</sub>
+          }
+          if (node.format & IS_SUPERSCRIPT) {
+            textNode = <sup>{textNode}</sup>
+          }
+
+          return <Fragment key={index}>{textNode}</Fragment>
         }
 
-        // Serialize children safely
-        const serializedChildren = hasChildren(node)
-          ? serializeLexical({ nodes: node.children })
-          : null
+        const serializedChildrenFn = (node: NodeTypes): JSX.Element | null => {
+          if (node.children == null) return null
 
-        // Block nodes
+          // Fix for checklists missing `checked: false`
+          if (node?.type === 'list' && node?.listType === 'check') {
+            for (const item of node.children) {
+              if ('checked' in item && item.checked == null) {
+                item.checked = false
+              }
+            }
+          }
+
+          return serializeLexical({ nodes: node.children as NodeTypes[] })
+        }
+
+        const serializedChildren = 'children' in node ? serializedChildrenFn(node) : ''
+
         if (node.type === 'block') {
           const block = node.fields
-          if (!block?.blockType) return null
+          const blockType = block?.blockType
+          if (!block || !blockType) return null
 
-          switch (block.blockType) {
+          switch (blockType) {
             case 'cta':
               return <CallToActionBlock key={index} {...block} />
             case 'mediaBlock':
               return (
                 <MediaBlock
                   key={index}
+                  {...block}
                   className="col-start-1 col-span-3"
                   imgClassName="m-0"
                   captionClassName="mx-auto max-w-[48rem]"
                   enableGutter={false}
                   disableInnerContainer={true}
-                  {...block}
                 />
               )
             case 'banner':
-              return <BannerBlock key={index} className="col-start-2 mb-4" {...block} />
+              return <BannerBlock key={index} {...block} className="col-start-2 mb-4" />
             case 'code':
-              return <CodeBlock key={index} className="col-start-2" {...block} />
+              return <CodeBlock key={index} {...block} className="col-start-2" />
             default:
               return null
           }
         }
 
-        // Inline/other nodes
         switch (node.type) {
           case 'linebreak':
             return <br key={index} className="col-start-2" />
+
           case 'paragraph':
             return (
               <p key={index} className="col-start-2">
                 {serializedChildren}
               </p>
             )
-          case 'heading':
-            const HeadingTag = node.tag || 'h2'
+
+          case 'heading': {
+            const Tag = node?.tag
             return (
-              <HeadingTag key={index} className="col-start-2">
+              <Tag key={index} className="col-start-2">
                 {serializedChildren}
-              </HeadingTag>
+              </Tag>
             )
-          case 'list':
-            const ListTag = node.tag || 'ul'
+          }
+
+          case 'list': {
+            const Tag = node?.tag
             return (
-              <ListTag key={index} className="list col-start-2">
+              <Tag key={index} className="list col-start-2">
                 {serializedChildren}
-              </ListTag>
+              </Tag>
             )
+          }
+
           case 'listitem':
-            if (node.checked != null) {
+            if (node?.checked != null) {
               return (
                 <li
                   key={index}
                   role="checkbox"
-                  tabIndex={-1}
                   aria-checked={node.checked ? 'true' : 'false'}
-                  value={node.value}
+                  tabIndex={-1}
+                  value={node?.value}
                 >
                   {serializedChildren}
                 </li>
               )
+            } else {
+              return (
+                <li key={index} value={node?.value}>
+                  {serializedChildren}
+                </li>
+              )
             }
-            return (
-              <li key={index} value={node.value}>
-                {serializedChildren}
-              </li>
-            )
+
           case 'quote':
             return (
               <blockquote key={index} className="col-start-2">
                 {serializedChildren}
               </blockquote>
             )
-          case 'link':
+
+          case 'link': {
             const fields = node.fields
             return (
               <CMSLink
                 key={index}
+                type={fields.linkType === 'internal' ? 'reference' : 'custom'}
+                url={fields.url}
                 newTab={Boolean(fields?.newTab)}
-                reference={fields?.doc as any}
-                type={fields?.linkType === 'internal' ? 'reference' : 'custom'}
-                url={fields?.url}
+                reference={fields.doc as any}
               >
                 {serializedChildren}
               </CMSLink>
             )
+          }
+
           default:
             return null
         }

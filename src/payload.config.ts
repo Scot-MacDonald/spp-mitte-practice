@@ -13,9 +13,11 @@ import {
   ItalicFeature,
   LinkFeature,
   lexicalEditor,
+  UnderlineFeature,
 } from '@payloadcms/richtext-lexical'
+import { TextColorFeature } from 'payload-lexical-typography'
 import sharp from 'sharp' // editor-import
-import { UnderlineFeature } from '@payloadcms/richtext-lexical'
+// import { UnderlineFeature } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -87,36 +89,44 @@ export default buildConfig({
     },
   },
   // This config helps us configure global or default features that the other editors can inherit
-  editor: lexicalEditor({
-    features: () => {
-      return [
-        UnderlineFeature(),
-        BoldFeature(),
-        ItalicFeature(),
-        LinkFeature({
-          enabledCollections: ['pages', 'posts'],
-          fields: ({ defaultFields }) => {
-            const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
-              if ('name' in field && field.name === 'url') return false
-              return true
-            })
+  // editor: lexicalEditor({
+  //   features: () => {
+  //     return [
+  //       UnderlineFeature(),
+  //       BoldFeature(),
+  //       ItalicFeature(),
+  //       LinkFeature({
+  //         enabledCollections: ['pages', 'posts'],
+  //         fields: ({ defaultFields }) => {
+  //           const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
+  //             if ('name' in field && field.name === 'url') return false
+  //             return true
+  //           })
 
-            return [
-              ...defaultFieldsWithoutUrl,
-              {
-                name: 'url',
-                type: 'text',
-                admin: {
-                  condition: ({ linkType }) => linkType !== 'internal',
-                },
-                label: ({ t }) => t('fields:enterURL'),
-                required: true,
-              },
-            ]
-          },
-        }),
-      ]
-    },
+  //           return [
+  //             ...defaultFieldsWithoutUrl,
+  //             {
+  //               name: 'url',
+  //               type: 'text',
+  //               admin: {
+  //                 condition: ({ linkType }) => linkType !== 'internal',
+  //               },
+  //               label: ({ t }) => t('fields:enterURL'),
+  //               required: true,
+  //             },
+  //           ]
+  //         },
+  //       }),
+  //     ]
+  //   },
+  // }),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      TextColorFeature({
+        colors: ['#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF', '#7eb36a'], // Customize this list
+      }),
+    ],
   }),
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
