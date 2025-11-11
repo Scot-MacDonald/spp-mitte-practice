@@ -50,9 +50,9 @@ export default function Map({
       />
 
       {/* Main marker */}
-      {/* <Marker position={center} icon={createIcon(mainIconUrl || '/media/spp_logo.png')}>
+      <Marker position={center} icon={createIcon(mainIconUrl || '/media/spp_logo.png')}>
         <Popup>Unsere Praxis</Popup>
-      </Marker> */}
+      </Marker>
 
       {/* Example additional markers */}
       {secondIconUrl && (
