@@ -223,6 +223,46 @@ export interface Page {
     | FormBlock
     | TextBildBlock
     | NewsAndHoursBlock
+    | {
+        heading: string;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        transports: {
+          title: string;
+          type: 'u-bahn' | 's-bahn' | 'bus' | 'tram' | 'other';
+          lines?:
+            | {
+                line: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[];
+        lat: number;
+        lng: number;
+        secondIconUrl?: string | null;
+        thirdIconUrl?: string | null;
+        fourthIconUrl?: string | null;
+        fifthIconUrl?: string | null;
+        sixthIconUrl?: string | null;
+        seventhIconUrl?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'kontaktAnfahrt';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -998,6 +1038,35 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         textBildBlock?: T | TextBildBlockSelect<T>;
         newsAndHours?: T | NewsAndHoursBlockSelect<T>;
+        kontaktAnfahrt?:
+          | T
+          | {
+              heading?: T;
+              content?: T;
+              transports?:
+                | T
+                | {
+                    title?: T;
+                    type?: T;
+                    lines?:
+                      | T
+                      | {
+                          line?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              lat?: T;
+              lng?: T;
+              secondIconUrl?: T;
+              thirdIconUrl?: T;
+              fourthIconUrl?: T;
+              fifthIconUrl?: T;
+              sixthIconUrl?: T;
+              seventhIconUrl?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T

@@ -11,6 +11,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TextBildBlock } from '@/blocks/TextBildBlock/Component'
 import { NewsAndHoursBlock } from '@/blocks/NewsAndHours/Component'
 import MitgliedBlock from '@/blocks/Mitglied/Component'
+import KontaktAnfahrtBlock from '@/blocks/KontaktAnfahrt/Component'
 
 import { TypedLocale } from 'payload'
 
@@ -23,6 +24,7 @@ const blockComponents = {
   mitglied: MitgliedBlock,
   textBildBlock: TextBildBlock,
   newsAndHours: NewsAndHoursBlock,
+  kontaktAnfahrt: KontaktAnfahrtBlock,
 }
 
 export const RenderBlocks: React.FC<{

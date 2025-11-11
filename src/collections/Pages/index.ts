@@ -10,6 +10,7 @@ import { MediaBlock } from '../../blocks/MediaBlock/config'
 import TextBildBlock from '../../blocks/TextBildBlock/config'
 import { NewsAndHours } from '@/blocks/NewsAndHours/config'
 import { Mitglied } from '@/blocks/Mitglied/config'
+import { KontaktAnfahrt } from '@/blocks/KontaktAnfahrt/config'
 
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
@@ -85,6 +86,7 @@ export const Pages: CollectionConfig = {
                 FormBlock,
                 TextBildBlock,
                 NewsAndHours,
+                KontaktAnfahrt,
               ],
               required: true,
             },
