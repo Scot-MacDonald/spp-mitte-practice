@@ -11,35 +11,37 @@ import type { Page } from '@/payload-types'
 
 // Define Media object type
 type MediaObject = {
-  filename: string
   alt?: string
+  filename?: string | null
 }
 
 // Props: override image type to include MediaObject | string | null
 type Props = Extract<Page['layout'][0], { blockType: 'textBildBlock' }> & {
   id?: string
   image?: MediaObject | string | null
+  className?: string
 }
 
 // Type guard
 const isMediaObject = (img: unknown): img is MediaObject =>
   typeof img === 'object' && img !== null && 'filename' in (img as MediaObject)
 
-export const TextBildBlock: React.FC<Props> = ({ title, richText, image }) => {
+export const TextBildBlock: React.FC<Props> = ({ title, richText, image, className }) => {
   const pathname = usePathname()
   const t = useTranslations()
 
   // Build src URL for Payload media
-  const imageSrc = isMediaObject(image)
-    ? `${process.env.NEXT_PUBLIC_SERVER_URL}/api/media/file/${(image as MediaObject).filename}`
-    : typeof image === 'string'
-      ? image
-      : undefined
+  const imageSrc =
+    image && typeof image !== 'string' && image.filename
+      ? `${process.env.NEXT_PUBLIC_SERVER_URL}/api/media/file/${image.filename}`
+      : typeof image === 'string'
+        ? image
+        : undefined
 
   const imageAlt = isMediaObject(image) ? (image as MediaObject).alt || '' : ''
 
   return (
-    <div>
+    <div className={className}>
       {/* Title */}
       <div className="page-with-header mb-[70px] sm:mb-[14px]">
         {pathname === '/' ? (

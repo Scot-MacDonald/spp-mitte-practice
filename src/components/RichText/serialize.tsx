@@ -80,10 +80,11 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
         }
 
         // -----------------------------
-        // 🧩 SERIALIZE CHILDREN
+        // 🧩 SERIALIZE CHILDREN (safe for all node types)
         // -----------------------------
         const serializedChildrenFn = (node: NodeTypes): JSX.Element | null => {
-          if (node.children == null) return null
+          // ✅ Safe type check to avoid "Property 'children' does not exist" errors
+          if (!('children' in node) || !node.children) return null
 
           // Fix for checklists missing `checked: false`
           if (node?.type === 'list' && node?.listType === 'check') {
