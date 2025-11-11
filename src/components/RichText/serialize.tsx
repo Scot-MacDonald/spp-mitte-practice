@@ -2,12 +2,17 @@ import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { TextBildBlock } from '@/blocks/TextBildBlock/Component' // ✅ NEW IMPORT
 import { CMSLink } from '@/components/Link'
 import React, { Fragment, JSX } from 'react'
 
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
 
-import type { BannerBlock as BannerBlockProps, Page } from '@/payload-types'
+import type {
+  BannerBlock as BannerBlockProps,
+  TextBildBlock as TextBildBlockProps, // ✅ NEW TYPE IMPORT
+  Page,
+} from '@/payload-types'
 
 import {
   IS_BOLD,
@@ -24,8 +29,10 @@ export type NodeTypes =
   | SerializedBlockNode<
       | Extract<Page['layout'][0], { blockType: 'cta' }>
       | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
+      | Extract<Page['layout'][0], { blockType: 'textBildBlock' }> // ✅ NEW BLOCK ADDED
       | BannerBlockProps
       | CodeBlockProps
+      | TextBildBlockProps
     >
 
 type Props = {
@@ -38,10 +45,13 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
       {nodes?.map((node, index): JSX.Element | null => {
         if (node == null) return null
 
+        // -----------------------------
+        // 🧩 TEXT NODES
+        // -----------------------------
         if (node.type === 'text') {
           let textNode: JSX.Element | string = node.text
 
-          // ✅ Apply color style first (check both object and string format)
+          // ✅ Apply color style first (object or string)
           if (typeof node.style === 'object' && node.style !== null && 'color' in node.style) {
             const color = (node.style as { color?: string })?.color
             if (color) {
@@ -55,41 +65,30 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             }
           }
 
-          // ✅ Then apply formatting tags around the color
-          if (node.format & IS_BOLD) {
-            textNode = <strong>{textNode}</strong>
-          }
-          if (node.format & IS_ITALIC) {
-            textNode = <em>{textNode}</em>
-          }
-          if (node.format & IS_STRIKETHROUGH) {
+          // ✅ Apply formatting
+          if (node.format & IS_BOLD) textNode = <strong>{textNode}</strong>
+          if (node.format & IS_ITALIC) textNode = <em>{textNode}</em>
+          if (node.format & IS_STRIKETHROUGH)
             textNode = <span style={{ textDecoration: 'line-through' }}>{textNode}</span>
-          }
-          if (node.format & IS_UNDERLINE) {
+          if (node.format & IS_UNDERLINE)
             textNode = <span style={{ textDecoration: 'underline' }}>{textNode}</span>
-          }
-          if (node.format & IS_CODE) {
-            textNode = <code>{node.text}</code>
-          }
-          if (node.format & IS_SUBSCRIPT) {
-            textNode = <sub>{textNode}</sub>
-          }
-          if (node.format & IS_SUPERSCRIPT) {
-            textNode = <sup>{textNode}</sup>
-          }
+          if (node.format & IS_CODE) textNode = <code>{node.text}</code>
+          if (node.format & IS_SUBSCRIPT) textNode = <sub>{textNode}</sub>
+          if (node.format & IS_SUPERSCRIPT) textNode = <sup>{textNode}</sup>
 
           return <Fragment key={index}>{textNode}</Fragment>
         }
 
+        // -----------------------------
+        // 🧩 SERIALIZE CHILDREN
+        // -----------------------------
         const serializedChildrenFn = (node: NodeTypes): JSX.Element | null => {
           if (node.children == null) return null
 
           // Fix for checklists missing `checked: false`
           if (node?.type === 'list' && node?.listType === 'check') {
             for (const item of node.children) {
-              if ('checked' in item && item.checked == null) {
-                item.checked = false
-              }
+              if ('checked' in item && item.checked == null) item.checked = false
             }
           }
 
@@ -98,6 +97,9 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
 
         const serializedChildren = 'children' in node ? serializedChildrenFn(node) : ''
 
+        // -----------------------------
+        // 🧩 CUSTOM BLOCK NODES
+        // -----------------------------
         if (node.type === 'block') {
           const block = node.fields
           const blockType = block?.blockType
@@ -115,29 +117,32 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                   imgClassName="m-0"
                   captionClassName="mx-auto max-w-[48rem]"
                   enableGutter={false}
-                  disableInnerContainer={true}
+                  disableInnerContainer
                 />
               )
             case 'banner':
               return <BannerBlock key={index} {...block} className="col-start-2 mb-4" />
             case 'code':
               return <CodeBlock key={index} {...block} className="col-start-2" />
+            case 'textBildBlock': // ✅ HANDLE YOUR NEW BLOCK
+              return <TextBildBlock key={index} {...block} className="col-start-2" />
             default:
               return null
           }
         }
 
+        // -----------------------------
+        // 🧩 STANDARD NODES
+        // -----------------------------
         switch (node.type) {
           case 'linebreak':
             return <br key={index} className="col-start-2" />
-
           case 'paragraph':
             return (
               <p key={index} className="col-start-2">
                 {serializedChildren}
               </p>
             )
-
           case 'heading': {
             const Tag = node?.tag
             return (
@@ -146,7 +151,6 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
               </Tag>
             )
           }
-
           case 'list': {
             const Tag = node?.tag
             return (
@@ -155,7 +159,6 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
               </Tag>
             )
           }
-
           case 'listitem':
             if (node?.checked != null) {
               return (
@@ -176,14 +179,12 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 </li>
               )
             }
-
           case 'quote':
             return (
               <blockquote key={index} className="col-start-2">
                 {serializedChildren}
               </blockquote>
             )
-
           case 'link': {
             const fields = node.fields
             return (
@@ -198,7 +199,6 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
               </CMSLink>
             )
           }
-
           default:
             return null
         }

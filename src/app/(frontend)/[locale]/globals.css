@@ -143,3 +143,65 @@ html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
 }
+
+/* page with header */
+.page-with-header {
+  box-sizing: border-box;
+  position: relative;
+  grid-column: 1 / 7;
+  color: #7eb36a;
+  border-top: 0.5px solid #7eb36a;
+  margin-top: 72px;
+}
+
+.page-header {
+  /* Default = mobile first (below lg) */
+  position: relative;
+  top: 0;
+  margin-top: 12px; /* spacing below border */
+  left: 0;
+  padding-right: 16px;
+  background-color: white;
+  letter-spacing: 0.07em;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  .page-header {
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+}
+
+/* On lg and up → overlap the border */
+@media (min-width: 1024px) {
+  .page-header {
+    position: absolute;
+    top: -22px;
+    margin-top: 0;
+  }
+}
+
+/* .page-with-header {
+  color: #7eb36a;
+}
+
+.page-header {
+  padding: 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: 1.125rem;
+} */
+
+.date {
+  background: #cde3c5;
+  display: inline;
+  padding: 2px 5px;
+  border-radius: 0.25rem;
+}
+
+.prose {
+  color: #000000;
+  max-width: 100%;
+}
