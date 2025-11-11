@@ -3,14 +3,17 @@
 import dynamic from 'next/dynamic'
 import React from 'react'
 import RichText from '@/components/RichText' // Adjust path as needed
+import L, { LatLngExpression } from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 
-const Map = dynamic(() => import('@/blocks/KontaktAnfahrt/Map'), { ssr: false })
+// Dynamically import Map to avoid SSR issues
+const Map = dynamic(() => import('./Map'), { ssr: false })
 
 type TransportType = 'u-bahn' | 's-bahn' | 'tram' | 'bus' | 'other'
 
 type Props = {
   heading: string
-  content?: any // rich text
+  content?: any
   transports: {
     title: string
     type: TransportType
@@ -67,7 +70,7 @@ export default function KontaktAnfahrtBlock({
           >
             <g fill="none" stroke="#7eb36a" strokeWidth="2">
               <line x1="3" x2="21" y1="12" y2="12" />
-              <line x1="12" x2="12" y1="3" y2="21" className="AccordionVerticalLine" />
+              <line x1="12" x2="12" y1="3" y2="21" />
             </g>
           </svg>
           {heading}
@@ -75,13 +78,11 @@ export default function KontaktAnfahrtBlock({
       </div>
 
       <div className="w-full grid grid-cols-12">
-        {/* Left side: rich text content */}
-        <div className="col-span-12 sm:col-span-12 lg:col-span-6 xl:col-span-4 p-4 lg:p-8 lg:border-r border-border">
+        <div className="col-span-12 lg:col-span-6 xl:col-span-4 p-4 lg:p-8 lg:border-r border-border">
           {content && <RichText content={content} />}
         </div>
 
-        {/* Right side: transports grid */}
-        <div className="col-span-12 sm:col-span-12 lg:col-span-6 xl:col-span-8 p-4 lg:p-8 grid grid-cols-1 md:grid-cols-1 xl:grid-cols-2 gap-8">
+        <div className="col-span-12 lg:col-span-6 xl:col-span-8 p-4 lg:p-8 grid grid-cols-1 xl:grid-cols-2 gap-8">
           {transports.map((transport, i) => (
             <div key={i} className="border rounded-lg p-4 flex flex-col">
               <div className="flex items-center mb-1 gap-2">
@@ -104,6 +105,7 @@ export default function KontaktAnfahrtBlock({
         <Map
           lat={lat}
           lng={lng}
+          //   mainIconUrl={fourthIconUrl || '/media/spp_logo.png'}
           secondIconUrl={secondIconUrl}
           thirdIconUrl={thirdIconUrl}
           fourthIconUrl={fourthIconUrl}

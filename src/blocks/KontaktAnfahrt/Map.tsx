@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import L, { LatLngExpression } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
-type Props = {
+interface MapProps {
   lat: number
   lng: number
   mainIconUrl?: string
@@ -18,108 +19,57 @@ type Props = {
 export default function Map({
   lat,
   lng,
-
+  mainIconUrl,
   secondIconUrl,
   thirdIconUrl,
   fourthIconUrl,
   fifthIconUrl,
   sixthIconUrl,
   seventhIconUrl,
-}: Props) {
-  const [Map, setMap] = useState<React.ReactNode>(null)
+}: MapProps) {
+  const center: LatLngExpression = [lat, lng]
 
-  useEffect(() => {
-    const loadMap = async () => {
-      const { MapContainer, TileLayer, Marker } = await import('react-leaflet')
-      const L = await import('leaflet')
-      //   await import("leaflet/dist/leaflet.css");
+  const createIcon = (url: string, size: [number, number] = [32, 32]) =>
+    L.icon({
+      iconUrl: url,
+      iconSize: size,
+      iconAnchor: [size[0] / 2, size[1]],
+      popupAnchor: [0, -size[1] / 2],
+    })
 
-      const dotIcon = L.icon({
-        iconUrl: '/media/spp_logo.png',
-        iconSize: [42, 42],
-        iconAnchor: [16, 32],
-        className: 'image-marker',
-      })
+  return (
+    <MapContainer
+      center={center}
+      zoom={15}
+      scrollWheelZoom={false}
+      style={{ height: '400px', width: '100%' }}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      />
 
-      const imageIcon = L.icon({
-        iconUrl: secondIconUrl || '/media/S-Bahn-Logo.webp',
-        iconSize: [20, 20],
-        iconAnchor: [15, 15],
-        className: 'image-marker',
-      })
+      {/* Main marker */}
+      {/* <Marker position={center} icon={createIcon(mainIconUrl || '/media/spp_logo.png')}>
+        <Popup>Unsere Praxis</Popup>
+      </Marker> */}
 
-      const imageIconU = L.icon({
-        iconUrl: thirdIconUrl || '/media/U-Bahn.svg',
-        iconSize: [20, 20],
-        iconAnchor: [15, 15],
-        className: 'image-marker',
-      })
-      const imageIconS = L.icon({
-        iconUrl: fourthIconUrl || '/media/S-Bahn-Logo.webp',
-        iconSize: [20, 20],
-        iconAnchor: [15, 15],
-        className: 'image-marker',
-      })
-      const imageIconT = L.icon({
-        iconUrl: fifthIconUrl || '/media/Tram-Logo.svg',
-        iconSize: [20, 20],
-        iconAnchor: [15, 15],
-        className: 'image-marker',
-      })
-      const imageIconB = L.icon({
-        iconUrl: sixthIconUrl || '/media/Bus-Logo.svg',
-        iconSize: [20, 20],
-        iconAnchor: [15, 15],
-        className: 'image-marker',
-      })
-      const imageIconB2 = L.icon({
-        iconUrl: seventhIconUrl || '/media/BUS-Logo-BVG.svg',
-        iconSize: [20, 20],
-        iconAnchor: [15, 15],
-        className: 'image-marker',
-      })
-      setMap(
-        // @ts-ignore
-        <MapContainer
-          center={[lat, lng]}
-          zoom={15}
-          zoomControl={true}
-          scrollWheelZoom={false}
-          dragging={true}
-          doubleClickZoom={false}
-          style={{
-            height: '550px',
-            width: '100%',
-            borderRadius: '',
-            zIndex: 1,
-          }}
-        >
-          <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-            attribution="&copy; <a href='https://carto.com/'>CARTO</a>"
-          />
-          <Marker position={[lat, lng]} icon={dotIcon} />
-          <Marker position={[52.52497770786654, 13.392909433053319]} icon={imageIcon} />
-          <Marker position={[52.52552931610739, 13.387399706552674]} icon={imageIconU} />
-          <Marker position={[52.5203, 13.3869]} icon={imageIconS} />
-          <Marker position={[52.5256, 13.3936]} icon={imageIconT} />
-          <Marker position={[52.5234, 13.3888]} icon={imageIconB} />
-          <Marker position={[52.5262, 13.3924]} icon={imageIconB2} />
-        </MapContainer>,
-      )
-    }
-
-    loadMap()
-  }, [
-    lat,
-    lng,
-    secondIconUrl,
-    thirdIconUrl,
-    fourthIconUrl,
-    fifthIconUrl,
-    sixthIconUrl,
-    seventhIconUrl,
-  ])
-
-  return <div>{Map || <div>Loading map…</div>}</div>
+      {/* Example additional markers */}
+      {/* {secondIconUrl && (
+        <Marker position={[lat + 0.001, lng + 0.001]} icon={createIcon(secondIconUrl)}>
+          <Popup>S-Bahn</Popup>
+        </Marker>
+      )}
+      {thirdIconUrl && (
+        <Marker position={[lat + 0.002, lng - 0.001]} icon={createIcon(thirdIconUrl)}>
+          <Popup>U-Bahn</Popup>
+        </Marker>
+      )}
+      {fourthIconUrl && (
+        <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(fourthIconUrl)}>
+          <Popup>Other</Popup>
+        </Marker>
+      )} */}
+    </MapContainer>
+  )
 }
