@@ -55,7 +55,7 @@ export default function Map({
       </Marker> */}
 
       {/* Example additional markers */}
-      {/* {secondIconUrl && (
+      {secondIconUrl && (
         <Marker position={[lat + 0.001, lng + 0.001]} icon={createIcon(secondIconUrl)}>
           <Popup>S-Bahn</Popup>
         </Marker>
@@ -69,7 +69,22 @@ export default function Map({
         <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(fourthIconUrl)}>
           <Popup>Other</Popup>
         </Marker>
-      )} */}
+      )}
+      {fifthIconUrl && (
+        <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(fifthIconUrl)}>
+          <Popup>Other</Popup>
+        </Marker>
+      )}
+      {sixthIconUrl && (
+        <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(sixthIconUrl)}>
+          <Popup>Other</Popup>
+        </Marker>
+      )}
+      {seventhIconUrl && (
+        <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(seventhIconUrl)}>
+          <Popup>Other</Popup>
+        </Marker>
+      )}
     </MapContainer>
   )
 }
