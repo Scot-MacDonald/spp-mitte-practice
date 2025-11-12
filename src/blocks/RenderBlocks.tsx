@@ -10,6 +10,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TextBildBlock } from '@/blocks/TextBildBlock/Component'
 import { NewsAndHoursBlock } from '@/blocks/NewsAndHours/Component'
+import { DoctorBlock } from '@/blocks/DoctorBlock/Component'
 import MitgliedBlock from '@/blocks/Mitglied/Component'
 import KontaktAnfahrtBlock from '@/blocks/KontaktAnfahrt/Component'
 
@@ -25,6 +26,7 @@ const blockComponents = {
   textBildBlock: TextBildBlock,
   newsAndHours: NewsAndHoursBlock,
   kontaktAnfahrt: KontaktAnfahrtBlock,
+  doctor: DoctorBlock,
 }
 
 export const RenderBlocks: React.FC<{
