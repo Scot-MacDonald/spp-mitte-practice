@@ -114,7 +114,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   return generateMeta({ doc: doctor })
 }
 
-const queryDoctor = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
+const queryDoctor = async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
@@ -136,4 +136,4 @@ const queryDoctor = cache(async ({ slug, locale }: { slug: string; locale: Typed
   })
 
   return result.docs?.[0] || null
-})
+}
