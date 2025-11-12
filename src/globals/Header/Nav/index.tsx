@@ -26,7 +26,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ header, onClickLink }) => 
             key={i}
             {...link}
             appearance="link"
-            className="text-[16px] onClick={onClickLink}"
+            className="text-[16px] text-black onClick={onClickLink}"
           />
         )
       })}

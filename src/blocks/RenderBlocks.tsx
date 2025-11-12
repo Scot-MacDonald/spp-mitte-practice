@@ -11,12 +11,14 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TextBildBlock } from '@/blocks/TextBildBlock/Component'
 import { NewsAndHoursBlock } from '@/blocks/NewsAndHours/Component'
 import { DoctorBlock } from '@/blocks/DoctorBlock/Component'
+import { AccordionBlock } from '@/blocks/Accordion/Component'
 import MitgliedBlock from '@/blocks/Mitglied/Component'
 import KontaktAnfahrtBlock from '@/blocks/KontaktAnfahrt/Component'
 
 import { TypedLocale } from 'payload'
 
 const blockComponents = {
+  accordion: AccordionBlock,
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
