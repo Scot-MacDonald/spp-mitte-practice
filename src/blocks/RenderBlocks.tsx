@@ -14,6 +14,7 @@ import { DoctorBlock } from '@/blocks/DoctorBlock/Component'
 import { AccordionBlock } from '@/blocks/Accordion/Component'
 import MitgliedBlock from '@/blocks/Mitglied/Component'
 import KontaktAnfahrtBlock from '@/blocks/KontaktAnfahrt/Component'
+import { SliderBlock } from '@/blocks/SliderBlock/Component'
 
 import { TypedLocale } from 'payload'
 
@@ -29,6 +30,7 @@ const blockComponents = {
   newsAndHours: NewsAndHoursBlock,
   kontaktAnfahrt: KontaktAnfahrtBlock,
   doctor: DoctorBlock,
+  contentSlider: SliderBlock,
 }
 
 export const RenderBlocks: React.FC<{
