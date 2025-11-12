@@ -11,7 +11,7 @@ import TextBildBlock from '../../blocks/TextBildBlock/config'
 import { NewsAndHours } from '@/blocks/NewsAndHours/config'
 import { Mitglied } from '@/blocks/Mitglied/config'
 import { KontaktAnfahrt } from '@/blocks/KontaktAnfahrt/config'
-
+import { AccordionBlock } from '@/blocks/Accordion/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -78,6 +78,7 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               localized: true,
               blocks: [
+                AccordionBlock,
                 CallToAction,
                 Content,
                 MediaBlock,
