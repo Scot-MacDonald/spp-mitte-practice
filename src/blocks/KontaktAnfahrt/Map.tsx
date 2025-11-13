@@ -56,32 +56,37 @@ export default function Map({
 
       {/* Example additional markers */}
       {secondIconUrl && (
-        <Marker position={[lat + 0.001, lng + 0.001]} icon={createIcon(secondIconUrl)}>
+        <Marker position={[52.52497770786654, 13.392909433053319]} icon={createIcon(secondIconUrl)}>
+          <Popup>Other</Popup>
+        </Marker>
+      )}
+
+      {thirdIconUrl && (
+        <Marker position={[52.52552931610739, 13.387399706552674]} icon={createIcon(thirdIconUrl)}>
+          <Popup>Other</Popup>
+        </Marker>
+      )}
+
+      {fourthIconUrl && (
+        <Marker position={[52.5203, 13.3869]} icon={createIcon(fourthIconUrl)}>
           <Popup>S-Bahn</Popup>
         </Marker>
       )}
-      {thirdIconUrl && (
-        <Marker position={[lat + 0.002, lng - 0.001]} icon={createIcon(thirdIconUrl)}>
+
+      {fifthIconUrl && (
+        <Marker position={[52.5256, 13.3936]} icon={createIcon(fifthIconUrl)}>
           <Popup>U-Bahn</Popup>
         </Marker>
       )}
-      {fourthIconUrl && (
-        <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(fourthIconUrl)}>
-          <Popup>Other</Popup>
-        </Marker>
-      )}
-      {fifthIconUrl && (
-        <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(fifthIconUrl)}>
-          <Popup>Other</Popup>
-        </Marker>
-      )}
+
       {sixthIconUrl && (
-        <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(sixthIconUrl)}>
+        <Marker position={[52.5234, 13.3888]} icon={createIcon(sixthIconUrl)}>
           <Popup>Other</Popup>
         </Marker>
       )}
+
       {seventhIconUrl && (
-        <Marker position={[lat - 0.0015, lng + 0.002]} icon={createIcon(seventhIconUrl)}>
+        <Marker position={[52.5262, 13.3924]} icon={createIcon(seventhIconUrl)}>
           <Popup>Other</Popup>
         </Marker>
       )}
