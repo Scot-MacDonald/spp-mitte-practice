@@ -30,17 +30,7 @@ export const AccordionBlock: Block = {
         ],
       }),
     },
-    {
-      name: 'richText2',
-      type: 'richText',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => [
-          ...rootFeatures,
-          FixedToolbarFeature(),
-          InlineToolbarFeature(),
-        ],
-      }),
-    },
+
     {
       name: 'items',
       type: 'array',

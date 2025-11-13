@@ -10,7 +10,7 @@ type AccordionBlockProps = {
   title?: string
   subheading?: string
   richText?: any
-  richText2?: any
+
   items?: {
     title: string
     content: any
@@ -28,7 +28,7 @@ export const AccordionBlock: React.FC<Props> = ({
   title,
   subheading,
   richText,
-  richText2,
+
   items,
 }) => {
   return (
@@ -108,7 +108,7 @@ export const AccordionBlock: React.FC<Props> = ({
                         <div className="mt-4">
                           <CMSLink
                             {...item.link}
-                            className="inline-block text-sm/6 px-4 py-2 rounded text-[#7eb36a] bg-[rgba(126,179,106,0.3)] hover:bg-[#7eb36a] hover:text-white transition-colors duration-200"
+                            className="inline-block  px-4 py-2 rounded text-[#7eb36a] bg-[rgba(126,179,106,0.3)] hover:bg-[#7eb36a] hover:text-white transition-colors duration-200"
                           />
                         </div>
                       )}
@@ -125,8 +125,6 @@ export const AccordionBlock: React.FC<Props> = ({
           {subheading && <h3 className="">{subheading}</h3>}
           {richText && <RichText content={richText} enableGutter={false} className="mb-4" />}
         </div>
-
-        {/* Second RichText column */}
       </div>
     </section>
   )
