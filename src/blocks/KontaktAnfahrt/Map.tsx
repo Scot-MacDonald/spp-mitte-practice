@@ -43,7 +43,7 @@ export default function Map({
       center={center}
       zoom={15}
       scrollWheelZoom={false}
-      style={{ height: '550px', width: '100%' }}
+      style={{ height: '550px', width: '100%', zIndex: 1 }}
     >
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
