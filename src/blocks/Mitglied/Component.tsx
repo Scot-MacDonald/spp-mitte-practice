@@ -34,7 +34,7 @@ export default function MitgliedBlock({ title, description, items }) {
           {description && <RichText content={description} />}
           <div className="flex gap-4 items-center mt-6">
             <img
-              src="/api/media/file/bng.jpg"
+              src="/api/media/file/hepatologie2026.png"
               alt="Image 1"
               className="w-24 h-28  rounded-lg object-cover"
             />
