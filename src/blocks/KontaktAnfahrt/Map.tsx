@@ -29,7 +29,7 @@ export default function Map({
 }: MapProps) {
   const center: LatLngExpression = [lat, lng]
 
-  const createIcon = (url: string, size: [number, number] = [32, 32]) =>
+  const createIcon = (url: string, size: [number, number] = [15, 15]) =>
     L.icon({
       iconUrl: url,
       iconSize: size,
