@@ -29,12 +29,13 @@ export default function Map({
 }: MapProps) {
   const center: LatLngExpression = [lat, lng]
 
-  const createIcon = (url: string, size: [number, number] = [15, 15]) =>
+  // Icon factory with SAME sizes as your second snippet
+  const createIcon = (url: string, type: 'main' | 'small' = 'small') =>
     L.icon({
       iconUrl: url,
-      iconSize: size,
-      iconAnchor: [size[0] / 2, size[1]],
-      popupAnchor: [0, -size[1] / 2],
+      iconSize: type === 'main' ? [42, 42] : [20, 20],
+      iconAnchor: type === 'main' ? [16, 32] : [15, 15],
+      className: 'image-marker',
     })
 
   return (
@@ -42,54 +43,40 @@ export default function Map({
       center={center}
       zoom={15}
       scrollWheelZoom={false}
-      style={{ height: '400px', width: '100%' }}
+      style={{ height: '550px', width: '100%' }}
     >
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         attribution="&copy; <a href='https://carto.com/'>CARTO</a>"
       />
 
-      {/* Main marker */}
-      <Marker position={center} icon={createIcon(mainIconUrl || '/media/spp_logo.png')}>
+      {/* Main marker (42×42) */}
+      <Marker position={center} icon={createIcon(mainIconUrl || '/media/spp_logo.png', 'main')}>
         <Popup>Unsere Praxis</Popup>
       </Marker>
 
-      {/* Example additional markers */}
+      {/* Additional markers (20×20) */}
       {secondIconUrl && (
-        <Marker position={[52.52497770786654, 13.392909433053319]} icon={createIcon(secondIconUrl)}>
-          <Popup>Other</Popup>
-        </Marker>
+        <Marker
+          position={[52.52497770786654, 13.392909433053319]}
+          icon={createIcon(secondIconUrl)}
+        />
       )}
 
       {thirdIconUrl && (
-        <Marker position={[52.52552931610739, 13.387399706552674]} icon={createIcon(thirdIconUrl)}>
-          <Popup>Other</Popup>
-        </Marker>
+        <Marker
+          position={[52.52552931610739, 13.387399706552674]}
+          icon={createIcon(thirdIconUrl)}
+        />
       )}
 
-      {fourthIconUrl && (
-        <Marker position={[52.5203, 13.3869]} icon={createIcon(fourthIconUrl)}>
-          <Popup>S-Bahn</Popup>
-        </Marker>
-      )}
+      {fourthIconUrl && <Marker position={[52.5203, 13.3869]} icon={createIcon(fourthIconUrl)} />}
 
-      {fifthIconUrl && (
-        <Marker position={[52.5256, 13.3936]} icon={createIcon(fifthIconUrl)}>
-          <Popup>U-Bahn</Popup>
-        </Marker>
-      )}
+      {fifthIconUrl && <Marker position={[52.5256, 13.3936]} icon={createIcon(fifthIconUrl)} />}
 
-      {sixthIconUrl && (
-        <Marker position={[52.5234, 13.3888]} icon={createIcon(sixthIconUrl)}>
-          <Popup>Other</Popup>
-        </Marker>
-      )}
+      {sixthIconUrl && <Marker position={[52.5234, 13.3888]} icon={createIcon(sixthIconUrl)} />}
 
-      {seventhIconUrl && (
-        <Marker position={[52.5262, 13.3924]} icon={createIcon(seventhIconUrl)}>
-          <Popup>Other</Popup>
-        </Marker>
-      )}
+      {seventhIconUrl && <Marker position={[52.5262, 13.3924]} icon={createIcon(seventhIconUrl)} />}
     </MapContainer>
   )
 }
