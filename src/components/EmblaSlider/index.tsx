@@ -65,7 +65,7 @@ export const EmblaSlider: React.FC<EmblaSliderProps> = ({ images, intervalMs = 4
   }, [images.length, intervalMs])
 
   return (
-    <div ref={emblaRef} className="relative w-full aspect-[16/9] overflow-hidden  shadow-md">
+    <div ref={emblaRef} className="relative w-full aspect-[4/3] overflow-hidden  shadow-md">
       {images.map((img, i) => (
         <div
           key={i}
@@ -76,7 +76,7 @@ export const EmblaSlider: React.FC<EmblaSliderProps> = ({ images, intervalMs = 4
           <Media
             resource={img.image}
             alt={img.alt}
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover"
             size="100vw"
           />
         </div>
