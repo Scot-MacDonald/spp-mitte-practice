@@ -101,7 +101,7 @@ export default function KontaktAnfahrtBlock({
         </div>
       </div>
 
-      <div className="mt-8 px-4 lg:px-8">
+      <div className="mt-8 px-4 lg:px-8 z-0">
         <Map
           lat={lat}
           lng={lng}
