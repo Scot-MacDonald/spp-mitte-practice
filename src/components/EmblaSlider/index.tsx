@@ -76,7 +76,7 @@ export const EmblaSlider: React.FC<EmblaSliderProps> = ({ images, intervalMs = 4
           <Media
             resource={img.image}
             alt={img.alt}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
             size="100vw"
           />
         </div>
