@@ -72,7 +72,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
               alt="Doctolib Logo"
               className="h-4 w-auto pr-2"
             />
-            {t('appointment')}
+            <span className="[@media(max-width:420px)]:hidden">{t('appointment')}</span>
           </Link>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger className="">

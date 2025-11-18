@@ -155,7 +155,7 @@ export default {
             h2: {
               fontSize: '1.5rem',
               fontWeight: '600',
-              marginBottom: '',
+              marginBottom: '.25em',
               marginTop: '0rem',
               '@media (max-width: 639px)': {
                 fontSize: '1rem', // smaller on sm and below
