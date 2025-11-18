@@ -41,7 +41,7 @@ export default function Map({
   return (
     <MapContainer
       center={center}
-      zoom={14}
+      zoom={16}
       scrollWheelZoom={false}
       style={{ height: '550px', width: '100%', zIndex: 1 }}
     >
