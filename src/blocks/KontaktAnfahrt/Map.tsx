@@ -41,7 +41,7 @@ export default function Map({
   return (
     <MapContainer
       center={center}
-      zoom={15}
+      zoom={14}
       scrollWheelZoom={false}
       style={{ height: '550px', width: '100%', zIndex: 1 }}
     >
@@ -52,7 +52,7 @@ export default function Map({
 
       {/* Main marker (42×42) */}
       <Marker position={center} icon={createIcon(mainIconUrl || '/media/spp_logo.png', 'main')}>
-        <Popup>Unsere Praxis</Popup>
+        <Popup>Linienstraße 127</Popup>
       </Marker>
 
       {/* Additional markers (20×20) */}
