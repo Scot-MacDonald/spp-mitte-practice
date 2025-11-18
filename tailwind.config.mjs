@@ -166,7 +166,7 @@ export default {
               fontWeight: '600',
               marginBottom: '0',
               marginTop: '0rem',
-              color: 'black',
+              color: 'white',
               '@media (max-width: 639px)': {
                 fontSize: '1rem', // smaller on sm and below
               },
