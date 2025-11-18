@@ -161,6 +161,16 @@ export default {
                 fontSize: '1rem', // smaller on sm and below
               },
             },
+            h3: {
+              fontSize: '1.3rem',
+              fontWeight: '600',
+              marginBottom: '0',
+              marginTop: '0rem',
+              color: 'black',
+              '@media (max-width: 639px)': {
+                fontSize: '1rem', // smaller on sm and below
+              },
+            },
             p: {
               fontSize: '1.3rem',
               fontWeight: '600',
