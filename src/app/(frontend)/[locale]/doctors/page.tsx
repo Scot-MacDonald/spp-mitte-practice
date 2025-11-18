@@ -10,7 +10,7 @@ import PageClient from './page.client'
 import { TypedLocale } from 'payload'
 import { getTranslations } from 'next-intl/server'
 
-export const revalidate = 600
+export const dynamic = 'force-dynamic'
 
 type Args = {
   params: Promise<{
