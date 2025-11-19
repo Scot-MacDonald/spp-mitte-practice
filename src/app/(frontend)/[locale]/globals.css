@@ -242,7 +242,7 @@ html[data-theme='light'] {
   grid-column: 1 / 7;
   color: #7eb36a;
   border-top: 0.5px solid #7eb36a;
-  margin-top: 72px;
+  /* margin-top: 72px; */
 }
 
 .page-header {
@@ -265,7 +265,7 @@ html[data-theme='light'] {
     grid-column: 1 / 7;
     color: #7eb36a;
     border-top: 0.5px solid #7eb36a;
-    margin-top: 0px;
+    /* margin-top: 0px; */
   }
 
   .page-header {
