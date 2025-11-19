@@ -148,6 +148,7 @@ export default {
               fontSize: '1.8rem',
               fontWeight: '700',
               marginBottom: '',
+              fontSize: '1.25rem',
               '@media (max-width: 639px)': {
                 fontSize: '1.1rem', // smaller on sm and below
               },
@@ -155,6 +156,7 @@ export default {
             h2: {
               fontSize: '1.5rem',
               fontWeight: '600',
+              fontSize: '1.25rem',
               marginBottom: '.25em',
               marginTop: '0rem',
               '@media (max-width: 639px)': {
@@ -166,6 +168,7 @@ export default {
               fontWeight: '600',
               marginBottom: '0',
               marginTop: '0rem',
+              fontSize: '1.25rem',
               color: 'white',
               '@media (max-width: 639px)': {
                 fontSize: '1rem', // smaller on sm and below
