@@ -70,7 +70,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
             <img
               src="/api/media/file/D_Dark_Blue-1.svg"
               alt="Doctolib Logo"
-              className="h-4 w-auto pr-2"
+              className="h-4 w-auto pr-2 [@media(max-width:420px)]:pr-0"
             />
             <span className="[@media(max-width:420px)]:hidden">{t('appointment')}</span>
           </Link>
