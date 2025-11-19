@@ -33,7 +33,6 @@
 
 import { cn } from 'src/utilities/cn'
 import React from 'react'
-
 import type { Doctor } from '@/payload-types'
 import { CardDoctor } from '@/components/CardDoctor'
 
@@ -44,11 +43,17 @@ export type Props = {
 export const CollectionDoctor: React.FC<Props> = ({ doctors }) => {
   return (
     <div className={cn('container')}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 items-stretch">
         {doctors
-          ?.filter((doctor) => doctor && doctor.slug && doctor.title) // only valid doctors
+          ?.filter((doctor) => doctor && doctor.slug && doctor.title)
           .map((doctor, index) => (
-            <CardDoctor key={index} doc={doctor} relationTo="doctors" showCategories />
+            <CardDoctor
+              key={index}
+              doc={doctor}
+              relationTo="doctors"
+              showCategories
+              className="h-full"
+            />
           ))}
       </div>
     </div>
