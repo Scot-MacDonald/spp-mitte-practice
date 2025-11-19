@@ -6,13 +6,12 @@ import type { Header as HeaderType } from '@/payload-types'
 import { LocaleSwitcher } from '@/components/LocaleSwitcher'
 import { CMSLink } from '@/components/Link'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 
 interface HeaderNavProps {
   header: HeaderType
   onClickLink?: () => void
 }
-const t = useTranslations()
+
 export const HeaderNav: React.FC<HeaderNavProps> = ({ header, onClickLink }) => {
   const navItems = header?.navItems || []
   const t = useTranslations()
@@ -26,17 +25,6 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ header, onClickLink }) => 
           </div>
         )
       })}
-      <Link
-        href="/"
-        className="bg-[#cde3c5] text-[#00264c] text-lg flex items-center font-semibold px-4 py-2 rounded"
-      >
-        <img
-          src="/api/media/file/D_Dark_Blue-1.svg "
-          alt="Doctolib Logo"
-          className="h-6 w-auto pr-2"
-        />
-        {t('appointment')}
-      </Link>
       <LocaleSwitcher />
     </nav>
   )
