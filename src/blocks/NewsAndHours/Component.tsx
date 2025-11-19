@@ -72,7 +72,7 @@ export const NewsAndHoursBlock: React.FC<Props> = ({
 
   return (
     <div className="p-0" id={id}>
-      <div className="page-with-header mt-5 lg:mt-18 mb-[20px] sm:mb-[50px]">
+      <div className="page-with-header mt-5 xl:mt-18 mb-[20px] sm:mb-[50px]">
         <h2 className="page-header px-4 sm:px-4  flex flex-col lg:flex-row items-start lg:items-center gap-2">
           <svg
             className="hidden xl:block"
