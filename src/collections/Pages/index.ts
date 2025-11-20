@@ -44,7 +44,6 @@ export const Pages: CollectionConfig = {
           collection: 'pages',
           locale: locale.code,
         })
-
         return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
       },
     },
@@ -54,7 +53,6 @@ export const Pages: CollectionConfig = {
         collection: 'pages',
         locale,
       })
-
       return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
     },
     useAsTitle: 'title',
@@ -62,23 +60,20 @@ export const Pages: CollectionConfig = {
   fields: [
     {
       name: 'title',
-      localized: true,
+      localized: true, // ✅ localized fields handle localization
       type: 'text',
       required: true,
     },
     {
       type: 'tabs',
       tabs: [
-        {
-          fields: [hero],
-          label: 'Hero',
-        },
+        { fields: [hero], label: 'Hero' },
         {
           fields: [
             {
               name: 'layout',
               type: 'blocks',
-              localized: true,
+              localized: true, // ✅ localized blocks
               blocks: [
                 AccordionBlock,
                 CallToAction,
@@ -107,19 +102,11 @@ export const Pages: CollectionConfig = {
               descriptionPath: 'meta.description',
               imagePath: 'meta.image',
             }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'media',
-            }),
-
+            MetaTitleField({ hasGenerateFn: true }),
+            MetaImageField({ relationTo: 'media' }),
             MetaDescriptionField({}),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -130,9 +117,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'publishedAt',
       type: 'date',
-      admin: {
-        position: 'sidebar',
-      },
+      admin: { position: 'sidebar' },
     },
     ...slugField('title', { slugOverrides: { localized: true } }),
   ],
@@ -142,9 +127,7 @@ export const Pages: CollectionConfig = {
   },
   versions: {
     drafts: {
-      autosave: {
-        interval: 100, // We set this interval for optimal live preview
-      },
+      autosave: { interval: 100 },
     },
     maxPerDoc: 50,
   },

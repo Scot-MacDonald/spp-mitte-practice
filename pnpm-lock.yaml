@@ -14,6 +14,9 @@ importers:
       '@payloadcms/email-resend':
         specifier: ^3.1.0
         version: 3.63.0(payload@3.63.0(graphql@16.12.0)(typescript@5.7.2))
+      '@payloadcms/live-preview':
+        specifier: ^3.64.0
+        version: 3.64.0
       '@payloadcms/live-preview-react':
         specifier: latest
         version: 3.63.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1133,6 +1136,9 @@ packages:
 
   '@payloadcms/live-preview@3.63.0':
     resolution: {integrity: sha512-ShYsfgWYuxMmzziF3/1tdz1AAlfBBndvEJKL6b0H4HiGVY/uS2xGp/O9utYH+NZ8FoUScMVkwwR0bVk04nmd8g==}
+
+  '@payloadcms/live-preview@3.64.0':
+    resolution: {integrity: sha512-2nzi1wSfBMD3THiO289emPnytOWD14cupOhT4SGmW34p+u47pZiwWBKUYbdgpPno1g3oadIuI4oELDC82gfHMQ==}
 
   '@payloadcms/next@3.63.0':
     resolution: {integrity: sha512-crS0uU/KFrHTbq4Fut+7NxtMAQwEJNwzm5DOJLWBWLR9HEMZwbfVSAKU9AvManMg5TEFgWSWVk1uD1vg0ANhOw==}
@@ -6039,6 +6045,8 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
 
   '@payloadcms/live-preview@3.63.0': {}
+
+  '@payloadcms/live-preview@3.64.0': {}
 
   '@payloadcms/next@3.63.0(@types/react@19.0.1)(graphql@16.12.0)(monaco-editor@0.54.0)(next@15.5.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.77.4))(payload@3.63.0(graphql@16.12.0)(typescript@5.7.2))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.7.2)':
     dependencies:
