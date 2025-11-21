@@ -1,46 +1,45 @@
-import type { Metadata } from 'next/types'
+// app/[local]/doctors/page/[pageNumber]page.tsx
+export const dynamic = 'force-dynamic'
+
+import React from 'react'
+import { getPayload } from 'payload'
+import { draftMode } from 'next/headers'
+import { getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { TypedLocale } from 'payload'
 
 import { CollectionDoctor } from '@/components/CollectionDoctor'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
-import React from 'react'
 import PageClient from './page.client'
-import { notFound } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
-import { TypedLocale } from 'payload'
+import configPromise from '@payload-config'
 
-export const dynamic = 'force-dynamic'
+type Args = { params: Promise<{ pageNumber: string; locale: TypedLocale }> }
 
-type Args = {
-  params: Promise<{
-    pageNumber: string
-    locale: TypedLocale
-  }>
-}
-
-export default async function Page({ params: paramsPromise }: Args) {
-  const { pageNumber, locale } = await paramsPromise
-  const payload = await getPayload({ config: configPromise })
-  const t = await getTranslations()
-
+export default async function PaginatedDoctors({ params: paramsPromise }: Args) {
+  const { pageNumber, locale = 'en' } = await paramsPromise
   const sanitizedPageNumber = Number(pageNumber)
 
   if (!Number.isInteger(sanitizedPageNumber)) notFound()
 
+  const t = await getTranslations()
+  const { isEnabled: draft } = await draftMode()
+  const payload = await getPayload({ config: configPromise })
+
   const doctors = await payload.find({
     collection: 'doctors',
+    locale,
     depth: 1,
     limit: 12,
-    locale,
     page: sanitizedPageNumber,
-    overrideAccess: false,
+    overrideAccess: draft,
+    draft,
   })
 
   return (
     <div className="pt-24 pb-24">
       <PageClient />
+
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
           <h1>{t('doctors')}</h1>
@@ -65,30 +64,4 @@ export default async function Page({ params: paramsPromise }: Args) {
       </div>
     </div>
   )
-}
-
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { pageNumber } = await paramsPromise
-  return {
-    title: `Payload Website Template Doctors Page ${pageNumber || ''}`,
-  }
-}
-
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
-  const doctors = await payload.find({
-    collection: 'doctors',
-    depth: 0,
-    limit: 10,
-    draft: false,
-    overrideAccess: false,
-  })
-
-  const pages: { pageNumber: string }[] = []
-
-  for (let i = 1; i <= doctors.totalPages; i++) {
-    pages.push({ pageNumber: String(i) })
-  }
-
-  return pages
 }
