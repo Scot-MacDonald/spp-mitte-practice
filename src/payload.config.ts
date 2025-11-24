@@ -6,7 +6,8 @@ import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
-
+import { en } from '@payloadcms/translations/languages/en'
+import { de } from '@payloadcms/translations/languages/de'
 import {
   BoldFeature,
   FixedToolbarFeature,
@@ -68,6 +69,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     user: Users.slug,
+
     livePreview: {
       breakpoints: [
         {
@@ -123,6 +125,9 @@ export default buildConfig({
   //     ]
   //   },
   // }),
+  i18n: {
+    supportedLanguages: { en, de },
+  },
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
