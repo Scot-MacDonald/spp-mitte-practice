@@ -61,6 +61,8 @@ export const TextBildBlock: React.FC<Props> = ({ title, richText, image, classNa
           {richText && <RichText content={richText} />}
           <Link
             href="https://www.doctolib.de/praxis/berlin/schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor?utm_campaign=website-button&utm_source=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor-website-button&utm_medium=referral&utm_content=option-8&utm_term=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-[#cde3c5] text-[#00264c] text-lg inline-flex items-center font-semibold px-4 py-2 rounded mt-6"
           >
             <img

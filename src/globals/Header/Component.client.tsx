@@ -66,7 +66,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
 
         {/* Mobile menu (only below xl) */}
         <div className="flex xl:hidden items-center gap-3">
-          <Link href="/" className="bg-[#cde3c5] flex items-center font-semibold px-2 py-1 rounded">
+          <Link
+            href="https://www.doctolib.de/praxis/berlin/schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor?utm_campaign=website-button&utm_source=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor-website-button&utm_medium=referral&utm_content=option-8&utm_term=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#cde3c5] flex items-center font-semibold px-2 py-1 rounded"
+          >
             <img
               src="/api/media/file/D_Dark_Blue-1.svg"
               alt="Doctolib Logo"
@@ -91,6 +96,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
               <Link
                 href="https://www.doctolib.de/praxis/berlin/schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor?utm_campaign=website-button&utm_source=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor-website-button&utm_medium=referral&utm_content=option-8&utm_term=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor"
                 onClick={closeSheet}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#cde3c5] text-[#00264c] text-lg flex items-center font-semibold px-4 py-2 rounded"
               >
                 <img
