@@ -60,8 +60,8 @@ export const TextBildBlock: React.FC<Props> = ({ title, richText, image, classNa
         <div className="md:col-span-12 lg:col-span-6 p-4 sm:p-8 order-2 lg:order-1">
           {richText && <RichText content={richText} />}
           <Link
-            href="/"
-            className="bg-[#cde3c5] text-[#00264c] text-lg inline-flex items-center font-semibold px-4 py-2 rounded"
+            href="https://www.doctolib.de/praxis/berlin/schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor?utm_campaign=website-button&utm_source=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor-website-button&utm_medium=referral&utm_content=option-8&utm_term=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor"
+            className="bg-[#cde3c5] text-[#00264c] text-lg inline-flex items-center font-semibold px-4 py-2 rounded mt-6"
           >
             <img
               src="/api/media/file/D_Dark_Blue-1.svg"

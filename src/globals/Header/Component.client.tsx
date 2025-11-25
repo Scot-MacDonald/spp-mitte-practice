@@ -89,7 +89,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
               </Link>
               <HeaderNav header={header} onClickLink={closeSheet} />
               <Link
-                href="/"
+                href="https://www.doctolib.de/praxis/berlin/schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor?utm_campaign=website-button&utm_source=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor-website-button&utm_medium=referral&utm_content=option-8&utm_term=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor"
                 onClick={closeSheet}
                 className="bg-[#cde3c5] text-[#00264c] text-lg flex items-center font-semibold px-4 py-2 rounded"
               >
