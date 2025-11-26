@@ -93,38 +93,7 @@ export default buildConfig({
       ],
     },
   },
-  // This config helps us configure global or default features that the other editors can inherit
-  // editor: lexicalEditor({
-  //   features: () => {
-  //     return [
-  //       UnderlineFeature(),
-  //       BoldFeature(),
-  //       ItalicFeature(),
-  //       LinkFeature({
-  //         enabledCollections: ['pages', 'posts'],
-  //         fields: ({ defaultFields }) => {
-  //           const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
-  //             if ('name' in field && field.name === 'url') return false
-  //             return true
-  //           })
 
-  //           return [
-  //             ...defaultFieldsWithoutUrl,
-  //             {
-  //               name: 'url',
-  //               type: 'text',
-  //               admin: {
-  //                 condition: ({ linkType }) => linkType !== 'internal',
-  //               },
-  //               label: ({ t }) => t('fields:enterURL'),
-  //               required: true,
-  //             },
-  //           ]
-  //         },
-  //       }),
-  //     ]
-  //   },
-  // }),
   i18n: {
     supportedLanguages: { en, de },
   },
@@ -210,7 +179,7 @@ export default buildConfig({
       },
     }),
 
-    payloadCloudPlugin(), // storage-adapter-placeholder
+    payloadCloudPlugin(),
   ],
   localization,
   email: resendAdapter({
@@ -224,3 +193,36 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
 })
+
+// This config helps us configure global or default features that the other editors can inherit
+// editor: lexicalEditor({
+//   features: () => {
+//     return [
+//       UnderlineFeature(),
+//       BoldFeature(),
+//       ItalicFeature(),
+//       LinkFeature({
+//         enabledCollections: ['pages', 'posts'],
+//         fields: ({ defaultFields }) => {
+//           const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
+//             if ('name' in field && field.name === 'url') return false
+//             return true
+//           })
+
+//           return [
+//             ...defaultFieldsWithoutUrl,
+//             {
+//               name: 'url',
+//               type: 'text',
+//               admin: {
+//                 condition: ({ linkType }) => linkType !== 'internal',
+//               },
+//               label: ({ t }) => t('fields:enterURL'),
+//               required: true,
+//             },
+//           ]
+//         },
+//       }),
+//     ]
+//   },
+// }),
