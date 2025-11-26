@@ -16,6 +16,7 @@ export const generateMeta = async (args: { doc: Page | Post }): Promise<Metadata
   // const title = doc?.meta?.title
   //   ? doc?.meta?.title + ' | Payload Website Template'
   //   : 'Payload Website Template'
+  // lets see what happens
 
   const title = doc?.meta?.title || 'SPP-Mitte'
 
