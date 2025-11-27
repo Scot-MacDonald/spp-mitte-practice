@@ -11,6 +11,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/co
 import { MenuIcon } from 'lucide-react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 interface HeaderClientProps {
   header: Header
@@ -57,11 +58,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
             rel="noopener noreferrer"
             className="bg-[#cde3c5] text-[#00264c] text-lg flex items-center font-semibold px-4 py-2 rounded"
           >
-            <img
-              src="/api/media/file/D_Dark_Blue-1.svg "
+            <Image
+              src="/api/media/file/D_Dark_Blue-1.svg"
               alt="Doctolib Logo"
               className="h-6 w-auto pr-2"
             />
+
             {t('appointment')}
           </Link>
         </div>

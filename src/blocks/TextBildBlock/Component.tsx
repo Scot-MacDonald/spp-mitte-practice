@@ -65,7 +65,7 @@ export const TextBildBlock: React.FC<Props> = ({ title, richText, image, classNa
             rel="noopener noreferrer"
             className="bg-[#cde3c5] text-[#00264c] text-lg inline-flex items-center font-semibold px-4 py-2 rounded mt-6"
           >
-            <img
+            <Image
               src="/api/media/file/D_Dark_Blue-1.svg"
               alt="Doctolib Logo"
               className="h-6 w-auto pr-2"
