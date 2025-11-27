@@ -47,7 +47,9 @@ export const SliderBlock: React.FC<Props> = ({ title, richText, images = [] }) =
             <div className="mb-2 pr-4">{richText && <RichText content={richText} />}</div>
             <div>
               <Link
-                href="/"
+                href="https://www.doctolib.de/praxis/berlin/schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor/booking/new-patient?specialityId=1286&utm_source=schwerpunktpraxis-fuer-infektionsmedizin-am-oranienburger-tor-website-button&utm_medium=referral&utm_campaign=website-button&utm_content=option-8&bookingFunnelSource=profile"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#cde3c5] text-[#00264c] text-lg inline-flex items-center font-semibold px-4 py-2 rounded"
               >
                 <img
