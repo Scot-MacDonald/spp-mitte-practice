@@ -53,10 +53,12 @@ export const SliderBlock: React.FC<Props> = ({ title, richText, images = [] }) =
                 rel="noopener noreferrer"
                 className="bg-[#cde3c5] text-[#00264c] text-lg inline-flex items-center font-semibold px-4 py-2 rounded"
               >
-                <Image>
-                  src="/api/media/file/D_Dark_Blue-1.svg" alt="Doctolib Logo" className="h-6 w-auto
-                  pr-2"
-                </Image>
+                <Image
+                  src="/api/media/file/new-image.svg"
+                  alt="Doctolib Logo"
+                  className="h-6 w-auto pr-2"
+                />
+
                 {t('appointment')}
               </Link>
             </div>
