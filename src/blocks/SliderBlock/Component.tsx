@@ -6,6 +6,7 @@ import RichText from '@/components/RichText'
 import { cn } from '@/utilities/cn'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 type Props = {
   title: string
@@ -52,11 +53,10 @@ export const SliderBlock: React.FC<Props> = ({ title, richText, images = [] }) =
                 rel="noopener noreferrer"
                 className="bg-[#cde3c5] text-[#00264c] text-lg inline-flex items-center font-semibold px-4 py-2 rounded"
               >
-                <img
-                  src="/api/media/file/D_Dark_Blue-1.svg"
-                  alt="Doctolib Logo"
-                  className="h-6 w-auto pr-2"
-                />
+                <Image>
+                  src="/api/media/file/D_Dark_Blue-1.svg" alt="Doctolib Logo" className="h-6 w-auto
+                  pr-2"
+                </Image>
                 {t('appointment')}
               </Link>
             </div>
