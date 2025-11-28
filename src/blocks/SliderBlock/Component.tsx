@@ -56,6 +56,8 @@ export const SliderBlock: React.FC<Props> = ({ title, richText, images = [] }) =
                 <Image
                   src="/api/media/file/D_Dark_Blue-1.svg"
                   alt="Doctolib Logo"
+                  width={100}
+                  height={30}
                   className="h-6 w-auto pr-2"
                 />
 
