@@ -78,6 +78,23 @@ const nextConfig = {
       // Pages no longer used → redirect to new home
       { source: '/contact', destination: '/de', permanent: true },
       { source: '/wegweiser', destination: '/de', permanent: true },
+
+      // Doctor pages
+      {
+        source: '/en/praxisteam/grimm',
+        destination: '/de/doctors/dr-med-roland-grimm',
+        permanent: true,
+      },
+      {
+        source: '/en/praxisteam/schoor',
+        destination: '/de/doctors/dr-med-isabel-wagner',
+        permanent: true,
+      },
+      {
+        source: '/en/praxisteam/klausen',
+        destination: '/de/doctors/dr-med-gerd-klausen',
+        permanent: true,
+      },
     ]
   },
 }
