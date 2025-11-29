@@ -14,8 +14,8 @@ RUN pnpm install --frozen-lockfile
 # Copy app source
 COPY . .
 
-# Approve any build scripts for native modules
-RUN pnpm approve-builds
+# Approve any build scripts for native modules automatically
+RUN pnpm approve-builds --yes
 
 # Force sharp to rebuild for Linux
 RUN npm rebuild sharp --platform=linux --arch=x64
