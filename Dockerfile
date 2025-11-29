@@ -1,29 +1,33 @@
+# Use Node 20 as base
 FROM node:20
 
+# Set working directory
 WORKDIR /app
 
-# Install pnpm
+# Install pnpm globally
 RUN npm install -g pnpm
 
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies including dev (so native builds happen)
+# Install dependencies including dev dependencies (for native builds)
 RUN pnpm install --frozen-lockfile
 
-# Copy app source
+# Copy application source
 COPY . .
 
-# Approve any build scripts for native modules automatically
-RUN pnpm approve-builds --yes
+# Approve build scripts for native modules (safe even if nothing pending)
+RUN pnpm approve-builds || true
 
-# Force sharp to rebuild for Linux
+# Rebuild sharp for Linux
 RUN npm rebuild sharp --platform=linux --arch=x64
 
-# Build Next.js app
+# Build Next.js application
 RUN pnpm build
 
-# Production image setup
+# Set production environment
 ENV NODE_ENV=production
 EXPOSE 3000
+
+# Start app
 CMD ["pnpm", "start"]
