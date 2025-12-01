@@ -3,11 +3,12 @@
 import React from 'react'
 import Link from 'next/link'
 import RichText from '@/components/RichText'
-import Image from 'next/image'
 
 export default function MitgliedBlock({ title, description, items }) {
   return (
     <>
+      {/* Commented out section title */}
+
       <div className="page-with-header mb-[20px] md:mb-[50px]">
         <h2 className="page-header px-4 flex flex-col lg:flex-row items-start lg:items-center gap-2">
           <svg
@@ -27,18 +28,20 @@ export default function MitgliedBlock({ title, description, items }) {
       </div>
 
       <div className="w-full grid grid-cols-12 mb-8">
+        {/* Commented out description */}
+
         <div className="col-span-12 sm:col-span-12 lg:col-span-6 xl:col-span-4 p-4 lg:p-8 lg:border-r border-border">
           {description && <RichText content={description} />}
           <div className="flex gap-4 items-center mt-6">
             <img
               src="/api/media/file/hepatologie2026.png"
               alt="Image 1"
-              className="w-24 h-28 rounded-lg object-cover"
+              className="w-24 h-28  rounded-lg object-cover"
             />
             <img
               src="/api/media/file/daig_dagnae_siegel.jpg"
               alt="Image 2"
-              className="w-26 h-24 rounded-lg object-cover"
+              className="w-26 h-24  rounded-lg object-cover"
             />
           </div>
         </div>
@@ -53,17 +56,30 @@ export default function MitgliedBlock({ title, description, items }) {
               rel="noopener noreferrer"
               className="relative border rounded-lg p-4 flex flex-col min-h-[138px] no-underline shadow-sm overflow-hidden"
             >
-              {/* Background logo with padding preserved */}
+              {/* Logo background per item */}
               {item.logo?.url && (
                 <div
-                  className="absolute inset-0 p-4 bg-center bg-contain bg-no-repeat pointer-events-none"
+                  className="absolute inset-[20px] bg-center bg-contain bg-no-repeat  pointer-events-none"
                   style={{ backgroundImage: `url(${item.logo.url})` }}
                 />
               )}
 
               {/* Foreground content */}
               <div className="relative z-10">
-                <span className="sr-only">{item.title} – Visit website</span>
+                {/* Title hidden for now */}
+                {/*
+                <h2 className="text-xl font-bold mb-1 text-gray-800">
+                  {item.title}
+                </h2>
+                */}
+                {/* Description hidden for now */}
+                {/*
+                {item.description.map((lineObj, j) => (
+                  <span key={j} className="text-gray-600">
+                    {lineObj.line}
+                  </span>
+                ))}
+                */}
               </div>
             </Link>
           ))}
