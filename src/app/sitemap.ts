@@ -25,14 +25,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const allUrls = [...pages, ...doctors]
 
-  return allUrls.map(({ de, en }) => ({
-    url: `https://www.schwerpunktpraxis-berlin-mitte.de${de}`,
-    lastModified: today,
-    alternates: {
-      languages: {
-        de: `https://www.schwerpunktpraxis-berlin-mitte.de${de}`,
-        en: `https://www.schwerpunktpraxis-berlin-mitte.de${en}`,
+  return allUrls.flatMap(({ de, en }) => [
+    {
+      url: `https://www.schwerpunktpraxis-berlin-mitte.de${de}`,
+      lastModified: today,
+      alternates: {
+        languages: {
+          de: `https://www.schwerpunktpraxis-berlin-mitte.de${de}`,
+          en: `https://www.schwerpunktpraxis-berlin-mitte.de${en}`,
+        },
       },
     },
-  }))
+    {
+      url: `https://www.schwerpunktpraxis-berlin-mitte.de${en}`,
+      lastModified: today,
+      alternates: {
+        languages: {
+          de: `https://www.schwerpunktpraxis-berlin-mitte.de${de}`,
+          en: `https://www.schwerpunktpraxis-berlin-mitte.de${en}`,
+        },
+      },
+    },
+  ])
 }
