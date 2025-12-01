@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import RichText from '@/components/RichText'
+import Image from 'next/image'
 
 export default function MitgliedBlock({ title, description, items }) {
   return (
@@ -56,31 +57,18 @@ export default function MitgliedBlock({ title, description, items }) {
               rel="noopener noreferrer"
               className="relative border rounded-lg p-4 flex flex-col min-h-[138px] no-underline shadow-sm overflow-hidden"
             >
-              {/* Logo background per item */}
+              {/* Logo image */}
               {item.logo?.url && (
-                <div
-                  className="absolute inset-[20px] bg-center bg-contain bg-no-repeat  pointer-events-none"
-                  style={{ backgroundImage: `url(${item.logo.url})` }}
+                <Image
+                  src={item.logo.url}
+                  alt={`${item.title} – Visit website`}
+                  fill
+                  className="object-contain pointer-events-none"
                 />
               )}
 
-              {/* Foreground content */}
-              <div className="relative z-10">
-                {/* Title hidden for now */}
-                {/*
-                <h2 className="text-xl font-bold mb-1 text-gray-800">
-                  {item.title}
-                </h2>
-                */}
-                {/* Description hidden for now */}
-                {/*
-                {item.description.map((lineObj, j) => (
-                  <span key={j} className="text-gray-600">
-                    {lineObj.line}
-                  </span>
-                ))}
-                */}
-              </div>
+              {/* Accessible text for screen readers */}
+              <span className="sr-only">{item.title} – Visit website</span>
             </Link>
           ))}
         </div>
