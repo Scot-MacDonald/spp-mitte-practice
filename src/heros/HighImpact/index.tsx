@@ -15,12 +15,18 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 }) => {
   const { setHeaderTheme } = useHeaderTheme()
 
-  // Determine initial media based on current time
-  const now = new Date()
-  const hour = now.getHours()
-  const initialMedia = hour >= 20 || hour < 5 ? mediaNight : mediaDay
+  // Determine safe initial media
+  const getInitialMedia = () => {
+    const now = new Date()
+    const hour = now.getHours()
 
-  const [currentMedia, setCurrentMedia] = useState(initialMedia)
+    if ((hour >= 20 || hour < 5) && mediaNight) return mediaNight
+    if (mediaDay) return mediaDay
+    // fallback if neither is available
+    return mediaNight || mediaDay || ''
+  }
+
+  const [currentMedia, setCurrentMedia] = useState(getInitialMedia)
 
   useEffect(() => {
     setHeaderTheme('dark')
@@ -28,14 +34,15 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
     const updateMedia = () => {
       const now = new Date()
       const hour = now.getHours()
-      if (hour >= 20 || hour < 5) {
+
+      if ((hour >= 20 || hour < 5) && mediaNight) {
         setCurrentMedia(mediaNight)
-      } else {
+      } else if (mediaDay) {
         setCurrentMedia(mediaDay)
       }
     }
 
-    // Check every 1 minute
+    // Update every 1 minute to handle day/night switch
     const interval = setInterval(updateMedia, 60 * 1000)
     return () => clearInterval(interval)
   }, [setHeaderTheme, mediaDay, mediaNight])
@@ -64,7 +71,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       </div>
 
       <div className="min-h-[60vh] mt-14 select-none relative">
-        {currentMedia && (
+        {currentMedia ? (
           <>
             <Media
               fill
@@ -74,6 +81,9 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
             />
             <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
           </>
+        ) : (
+          // Optional fallback: simple colored div if no media is available
+          <div className="absolute inset-0 bg-gray-800" />
         )}
       </div>
     </div>
