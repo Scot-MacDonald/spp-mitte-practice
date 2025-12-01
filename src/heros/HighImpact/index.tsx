@@ -14,7 +14,13 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   richText,
 }) => {
   const { setHeaderTheme } = useHeaderTheme()
-  const [currentMedia, setCurrentMedia] = useState(mediaDay)
+
+  // Determine initial media based on current time
+  const now = new Date()
+  const hour = now.getHours()
+  const initialMedia = hour >= 20 || hour < 5 ? mediaNight : mediaDay
+
+  const [currentMedia, setCurrentMedia] = useState(initialMedia)
 
   useEffect(() => {
     setHeaderTheme('dark')
@@ -22,8 +28,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
     const updateMedia = () => {
       const now = new Date()
       const hour = now.getHours()
-
-      // Show night image from 20:00 to 04:59
       if (hour >= 20 || hour < 5) {
         setCurrentMedia(mediaNight)
       } else {
@@ -31,12 +35,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       }
     }
 
-    // Set on initial load
-    updateMedia()
-
-    // Optional: check every 15 minutes to keep it fresh
-    const interval = setInterval(updateMedia, 60 * 1000) // 1 minute
-
+    // Check every 1 minute
+    const interval = setInterval(updateMedia, 60 * 1000)
     return () => clearInterval(interval)
   }, [setHeaderTheme, mediaDay, mediaNight])
 
@@ -62,7 +62,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           )}
         </div>
       </div>
-      <div className="min-h-[60vh] mt-14 select-none">
+
+      <div className="min-h-[60vh] mt-14 select-none relative">
         {currentMedia && (
           <>
             <Media
