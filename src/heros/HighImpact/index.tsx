@@ -14,19 +14,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   richText,
 }) => {
   const { setHeaderTheme } = useHeaderTheme()
-
-  // Determine safe initial media
-  const getInitialMedia = () => {
-    const now = new Date()
-    const hour = now.getHours()
-
-    if ((hour >= 20 || hour < 5) && mediaNight) return mediaNight
-    if (mediaDay) return mediaDay
-    // fallback if neither is available
-    return mediaNight || mediaDay || ''
-  }
-
-  const [currentMedia, setCurrentMedia] = useState(getInitialMedia)
+  const [currentMedia, setCurrentMedia] = useState(mediaDay)
 
   useEffect(() => {
     setHeaderTheme('dark')
@@ -35,15 +23,20 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       const now = new Date()
       const hour = now.getHours()
 
-      if ((hour >= 20 || hour < 5) && mediaNight) {
+      // Show night image from 20:00 to 04:59
+      if (hour >= 20 || hour < 5) {
         setCurrentMedia(mediaNight)
-      } else if (mediaDay) {
+      } else {
         setCurrentMedia(mediaDay)
       }
     }
 
-    // Update every 1 minute to handle day/night switch
-    const interval = setInterval(updateMedia, 60 * 1000)
+    // Set on initial load
+    updateMedia()
+
+    // Optional: check every 15 minutes to keep it fresh
+    const interval = setInterval(updateMedia, 60 * 1000) // 1 minute
+
     return () => clearInterval(interval)
   }, [setHeaderTheme, mediaDay, mediaNight])
 
@@ -69,9 +62,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           )}
         </div>
       </div>
-
-      <div className="min-h-[60vh] mt-14 select-none relative">
-        {currentMedia ? (
+      <div className="min-h-[60vh] mt-14 select-none">
+        {currentMedia && (
           <>
             <Media
               fill
@@ -81,9 +73,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
             />
             <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
           </>
-        ) : (
-          // Optional fallback: simple colored div if no media is available
-          <div className="absolute inset-0 bg-gray-800" />
         )}
       </div>
     </div>
