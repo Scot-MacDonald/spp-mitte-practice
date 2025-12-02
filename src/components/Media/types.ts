@@ -12,7 +12,7 @@ export interface Props {
   onClick?: () => void
   onLoad?: () => void
   priority?: boolean
-  fetchPriority?: 'high' | 'low' | 'auto' // ⭐ REQUIRED
+  fetchPriority?: 'high' | 'low' | 'auto'
   ref?: Ref<HTMLImageElement | HTMLVideoElement | null>
   resource?: MediaType | string | number
   size?: string

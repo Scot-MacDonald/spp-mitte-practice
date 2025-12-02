@@ -21,7 +21,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 
     const updateMedia = () => {
       const hour = new Date().getHours()
-
       if (hour >= 20 || hour < 5) {
         setCurrentMedia(mediaNight)
       } else {
@@ -30,31 +29,12 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
     }
 
     updateMedia()
-
     const interval = setInterval(updateMedia, 60 * 1000)
-
     return () => clearInterval(interval)
   }, [setHeaderTheme, mediaDay, mediaNight])
 
   return (
-    <div className="relative flex items-end text-white min-h-[60vh]" data-theme="dark">
-      {/* Background image wrapper — MUST be relative & full size */}
-      <div className="absolute inset-0 select-none">
-        {currentMedia && (
-          <>
-            <Media
-              fill
-              priority
-              fetchPriority="high"
-              imgClassName="object-cover -z-10 transition-opacity duration-1000"
-              resource={currentMedia}
-            />
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black to-transparent" />
-          </>
-        )}
-      </div>
-
-      {/* Foreground content */}
+    <div className="relative flex items-end text-white" data-theme="dark">
       <div className="container-full pl-4 md:pl-8 mb-8 z-10 relative">
         <div className="max-w-[44rem]">
           {richText && (
@@ -75,6 +55,23 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
             </ul>
           )}
         </div>
+      </div>
+
+      {/* ⬇️ Full height hero restored */}
+      <div className="min-h-[60vh] mt-14 select-none relative w-full">
+        {currentMedia && (
+          <>
+            <Media
+              fill
+              priority
+              fetchPriority="high"
+              size="100vw"
+              imgClassName="object-cover -z-10 transition-opacity duration-1000"
+              resource={currentMedia}
+            />
+            <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
+          </>
+        )}
       </div>
     </div>
   )

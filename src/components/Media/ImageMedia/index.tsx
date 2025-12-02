@@ -1,13 +1,11 @@
 'use client'
 
 import type { StaticImageData } from 'next/image'
-import { cn } from 'src/utilities/cn'
 import NextImage from 'next/image'
 import React from 'react'
-import type { Props as MediaProps } from '../types'
-import cssVariables from '@/cssVariables'
+import { cn } from 'src/utilities/cn'
 
-const { breakpoints } = cssVariables
+import type { Props as MediaProps } from '../types'
 
 export const ImageMedia: React.FC<MediaProps> = (props) => {
   const {
@@ -17,10 +15,10 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     onClick,
     onLoad: onLoadFromProps,
     priority,
-    fetchPriority, // ← allow this now
     resource,
     size: sizeFromProps,
     src: srcFromProps,
+    fetchPriority, // ⬅️ ADD THIS
   } = props
 
   let width: number | undefined
@@ -29,17 +27,15 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   let src: StaticImageData | string = srcFromProps || ''
 
   if (!src && resource && typeof resource === 'object') {
-    width = resource.width!
-    height = resource.height!
-    alt = resource.alt
-    src = `${process.env.NEXT_PUBLIC_SERVER_URL}${resource.url}`
+    const { alt: resourceAlt, height: fullHeight, url, width: fullWidth } = resource
+    width = fullWidth!
+    height = fullHeight!
+    alt = resourceAlt
+    src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
   }
 
-  const sizes = sizeFromProps
-    ? sizeFromProps
-    : Object.entries(breakpoints)
-        .map(([, value]) => `(max-width: ${value}px) ${value}px`)
-        .join(', ')
+  // Best for hero images & LCP
+  const sizes = sizeFromProps || '100vw'
 
   return (
     <NextImage
@@ -47,14 +43,14 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       className={cn(imgClassName)}
       fill={fill}
       height={!fill ? height : undefined}
-      onClick={onClick}
-      onLoad={onLoadFromProps}
+      width={!fill ? width : undefined}
+      src={src}
+      sizes={sizes}
       priority={priority}
       fetchPriority={fetchPriority}
-      quality={60}
-      sizes={sizes}
-      src={src}
-      width={!fill ? width : undefined}
+      quality={70}
+      onClick={onClick}
+      onLoad={onLoadFromProps}
     />
   )
 }
