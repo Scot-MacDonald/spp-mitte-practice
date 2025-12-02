@@ -86,6 +86,7 @@ export const TextBildBlock: React.FC<Props> = ({ title, richText, image, classNa
               <Image
                 src={imageSrc}
                 alt={imageAlt}
+                priority // Forces image to be preloaded
                 width={800}
                 height={600}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
