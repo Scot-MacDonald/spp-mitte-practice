@@ -69,6 +69,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
               fill
               imgClassName="-z-10 object-cover transition-opacity duration-1000"
               priority
+              fetchPriority="high"
               resource={currentMedia}
             />
             <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />

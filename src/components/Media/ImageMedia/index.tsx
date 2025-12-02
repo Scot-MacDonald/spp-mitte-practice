@@ -18,6 +18,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     onClick,
     onLoad: onLoadFromProps,
     priority,
+    fetchPriority,
     resource,
     size: sizeFromProps,
     src: srcFromProps,
@@ -72,6 +73,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       src={src}
       sizes={sizes}
       priority={priority}
+      fetchPriority={fetchPriority}
       quality={60} // ✔ improved compression, fixes PSI warnings
       onClick={onClick}
       onLoad={() => {
