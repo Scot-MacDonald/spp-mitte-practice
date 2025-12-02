@@ -6,8 +6,8 @@ import React from 'react'
 
 import { cn } from 'src/utilities/cn'
 import type { Props as MediaProps } from '../types'
-
 import cssVariables from '@/cssVariables'
+
 const { breakpoints } = cssVariables
 
 export const ImageMedia: React.FC<MediaProps> = (props) => {
@@ -18,7 +18,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     onClick,
     onLoad: onLoadFromProps,
     priority,
-    fetchPriority,
+    fetchPriority, // ← NEW
     resource,
     size: sizeFromProps,
     src: srcFromProps,
@@ -48,15 +48,10 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   let sizes: string
 
   if (sizeFromProps) {
-    // 1. Explicit override passed by parent
     sizes = sizeFromProps
   } else if (fill) {
-    // 2. Full-bleed images (hero, banners)
-    // These always span full viewport width → best performance & Lighthouse compliant
-    sizes = '100vw'
+    sizes = '(max-width: 1200px) 100vw, 1200px' // <- capped width for performance
   } else {
-    // 3. Non-fill images → responsive container widths
-    // This replaces your old incorrect breakpoint logic
     sizes =
       Object.entries(breakpoints)
         .map(([, value]) => `(max-width: ${value}px) 100vw`)
@@ -73,8 +68,8 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       src={src}
       sizes={sizes}
       priority={priority}
-      fetchPriority={fetchPriority}
-      quality={60} // ✔ improved compression, fixes PSI warnings
+      fetchPriority={fetchPriority} // ← NEW
+      quality={60}
       onClick={onClick}
       onLoad={() => {
         setIsLoading(false)
