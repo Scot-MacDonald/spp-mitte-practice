@@ -1,5 +1,4 @@
 'use client'
-
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import React, { useEffect, useState } from 'react'
 
@@ -15,18 +14,31 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   richText,
 }) => {
   const { setHeaderTheme } = useHeaderTheme()
-  const [currentMedia, setCurrentMedia] = useState<typeof mediaDay | null>(null)
+  const [currentMedia, setCurrentMedia] = useState(mediaDay)
 
   useEffect(() => {
     setHeaderTheme('dark')
 
-    const now = new Date()
-    const hour = now.getHours()
+    const updateMedia = () => {
+      const now = new Date()
+      const hour = now.getHours()
 
-    // Choose correct media before first render
-    const selectedMedia = hour >= 20 || hour < 5 ? mediaNight : mediaDay
-    setCurrentMedia(selectedMedia)
-  }, [mediaDay, mediaNight, setHeaderTheme])
+      // Show night image from 20:00 to 04:59
+      if (hour >= 20 || hour < 5) {
+        setCurrentMedia(mediaNight)
+      } else {
+        setCurrentMedia(mediaDay)
+      }
+    }
+
+    // Set on initial load
+    updateMedia()
+
+    // Optional: check every 15 minutes to keep it fresh
+    const interval = setInterval(updateMedia, 60 * 1000) // 1 minute
+
+    return () => clearInterval(interval)
+  }, [setHeaderTheme, mediaDay, mediaNight])
 
   return (
     <div className="relative flex items-end text-white" data-theme="dark">
@@ -50,7 +62,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           )}
         </div>
       </div>
-
       <div className="min-h-[60vh] mt-14 select-none">
         {currentMedia && (
           <>
@@ -58,7 +69,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
               fill
               imgClassName="-z-10 object-cover transition-opacity duration-1000"
               priority
-              fetchPriority="high"
               resource={currentMedia}
             />
             <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
