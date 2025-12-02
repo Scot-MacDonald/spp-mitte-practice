@@ -4,7 +4,6 @@ import type { StaticImageData } from 'next/image'
 import { cn } from 'src/utilities/cn'
 import NextImage from 'next/image'
 import React from 'react'
-
 import type { Props as MediaProps } from '../types'
 import cssVariables from '@/cssVariables'
 
@@ -18,13 +17,11 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     onClick,
     onLoad: onLoadFromProps,
     priority,
-    fetchPriority, // ⭐ NEW
+    fetchPriority, // ← allow this now
     resource,
     size: sizeFromProps,
     src: srcFromProps,
   } = props
-
-  const [isLoading, setIsLoading] = React.useState(true)
 
   let width: number | undefined
   let height: number | undefined
@@ -32,41 +29,32 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   let src: StaticImageData | string = srcFromProps || ''
 
   if (!src && resource && typeof resource === 'object') {
-    const { alt: altFromResource, height: fullHeight, url, width: fullWidth } = resource
-
-    width = fullWidth!
-    height = fullHeight!
-    alt = altFromResource
-    src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
+    width = resource.width!
+    height = resource.height!
+    alt = resource.alt
+    src = `${process.env.NEXT_PUBLIC_SERVER_URL}${resource.url}`
   }
 
-  // ⭐ Better sizes: hero images use 100vw, others use breakpoints
   const sizes = sizeFromProps
     ? sizeFromProps
-    : fill
-      ? '100vw'
-      : Object.entries(breakpoints)
-          .map(([, value]) => `(max-width: ${value}px) ${value}px`)
-          .join(', ') + ', 100vw'
+    : Object.entries(breakpoints)
+        .map(([, value]) => `(max-width: ${value}px) ${value}px`)
+        .join(', ')
 
   return (
     <NextImage
       alt={alt || ''}
       className={cn(imgClassName)}
       fill={fill}
-      width={!fill ? width : undefined}
       height={!fill ? height : undefined}
-      src={src}
-      sizes={sizes}
-      priority={priority}
-      fetchPriority={fetchPriority} // ⭐ NEW FOR LCP
-      loading={priority ? 'eager' : 'lazy'}
-      quality={60}
       onClick={onClick}
-      onLoad={() => {
-        setIsLoading(false)
-        onLoadFromProps?.()
-      }}
+      onLoad={onLoadFromProps}
+      priority={priority}
+      fetchPriority={fetchPriority}
+      quality={60}
+      sizes={sizes}
+      src={src}
+      width={!fill ? width : undefined}
     />
   )
 }
