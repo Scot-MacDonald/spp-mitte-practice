@@ -1,6 +1,6 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
@@ -14,31 +14,14 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   richText,
 }) => {
   const { setHeaderTheme } = useHeaderTheme()
-  const [currentMedia, setCurrentMedia] = useState(mediaDay)
+
+  // ❗ SSR-compatible: choose image BEFORE render, not in useEffect
+  const hour = new Date().getHours()
+  const currentMedia = hour >= 20 || hour < 5 ? mediaNight : mediaDay
 
   useEffect(() => {
     setHeaderTheme('dark')
-
-    const updateMedia = () => {
-      const now = new Date()
-      const hour = now.getHours()
-
-      // Show night image from 20:00 to 04:59
-      if (hour >= 20 || hour < 5) {
-        setCurrentMedia(mediaNight)
-      } else {
-        setCurrentMedia(mediaDay)
-      }
-    }
-
-    // Set on initial load
-    updateMedia()
-
-    // Optional: check every 15 minutes to keep it fresh
-    const interval = setInterval(updateMedia, 60 * 1000) // 1 minute
-
-    return () => clearInterval(interval)
-  }, [setHeaderTheme, mediaDay, mediaNight])
+  }, [setHeaderTheme])
 
   return (
     <div className="relative flex items-end text-white" data-theme="dark">
@@ -62,13 +45,17 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           )}
         </div>
       </div>
-      <div className="min-h-[60vh] mt-14 select-none">
+
+      {/* LCP IMAGE */}
+      <div className="min-h-[60vh] mt-14 select-none relative w-full">
         {currentMedia && (
           <>
             <Media
               fill
               imgClassName="-z-10 object-cover transition-opacity duration-1000"
               priority
+              fetchPriority="high" // ⭐ required by PSI
+              size="100vw" // ⭐ best for hero images
               resource={currentMedia}
             />
             <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
