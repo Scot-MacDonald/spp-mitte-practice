@@ -67,9 +67,7 @@ export default async function RootLayout({ children, params }: Args) {
 
             {/* ✅ Live preview must be AFTER the header & BEFORE page content */}
             <LivePreviewListener />
-
-            {children}
-
+            <main id="main-content">{children}</main>
             <Footer locale={locale} />
           </NextIntlClientProvider>
         </Providers>
