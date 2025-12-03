@@ -20,7 +20,10 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
     setHeaderTheme('dark')
 
     const updateMedia = () => {
-      const hour = new Date().getHours()
+      const now = new Date()
+      const hour = now.getHours()
+
+      // Show night image from 20:00 to 04:59
       if (hour >= 20 || hour < 5) {
         setCurrentMedia(mediaNight)
       } else {
@@ -28,8 +31,12 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       }
     }
 
+    // Set on initial load
     updateMedia()
-    const interval = setInterval(updateMedia, 60 * 1000)
+
+    // Optional: check every 15 minutes to keep it fresh
+    const interval = setInterval(updateMedia, 60 * 1000) // 1 minute
+
     return () => clearInterval(interval)
   }, [setHeaderTheme, mediaDay, mediaNight])
 
@@ -44,7 +51,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
               enableGutter={false}
             />
           )}
-
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex gap-4">
               {links.map(({ link }, i) => (
@@ -56,17 +62,13 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           )}
         </div>
       </div>
-
-      {/* ⬇️ Full height hero restored */}
-      <div className="min-h-[60vh] mt-14 select-none relative w-full">
+      <div className="min-h-[60vh] mt-14 select-none">
         {currentMedia && (
           <>
             <Media
               fill
+              imgClassName="-z-10 object-cover transition-opacity duration-1000"
               priority
-              fetchPriority="high"
-              size="100vw"
-              imgClassName="object-cover -z-10 transition-opacity duration-1000"
               resource={currentMedia}
             />
             <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
