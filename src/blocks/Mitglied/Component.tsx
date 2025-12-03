@@ -56,31 +56,19 @@ export default function MitgliedBlock({ title, description, items }) {
               rel="noopener noreferrer"
               className="relative border rounded-lg p-4 flex flex-col min-h-[138px] no-underline shadow-sm overflow-hidden"
             >
+              {/* Accessible link name (invisible visually) */}
+              <span className="sr-only">{item.title || item.url}</span>
+
               {/* Logo background per item */}
               {item.logo?.url && (
                 <div
-                  className="absolute inset-[20px] bg-center bg-contain bg-no-repeat  pointer-events-none"
+                  className="absolute inset-[20px] bg-center bg-contain bg-no-repeat pointer-events-none"
                   style={{ backgroundImage: `url(${item.logo.url})` }}
                 />
               )}
 
               {/* Foreground content */}
-              <div className="relative z-10">
-                {/* Title hidden for now */}
-                {/*
-                <h2 className="text-xl font-bold mb-1 text-gray-800">
-                  {item.title}
-                </h2>
-                */}
-                {/* Description hidden for now */}
-                {/*
-                {item.description.map((lineObj, j) => (
-                  <span key={j} className="text-gray-600">
-                    {lineObj.line}
-                  </span>
-                ))}
-                */}
-              </div>
+              <div className="relative z-10"></div>
             </Link>
           ))}
         </div>
