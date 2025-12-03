@@ -88,7 +88,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
             <span className="[@media(max-width:420px)]:hidden">{t('appointment')}</span>
           </Link>
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger className="">
+            <SheetTrigger className="" aria-label={open ? 'Close menu' : 'Open menu'}>
               <MenuIcon className="w-8 h-8" />
             </SheetTrigger>
             <SheetContent side="right" className="w-64 flex flex-col gap-4 p-4">

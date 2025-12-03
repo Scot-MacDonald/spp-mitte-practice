@@ -30,13 +30,24 @@ export default function Map({
   const center: LatLngExpression = [lat, lng]
 
   // Icon factory with SAME sizes as your second snippet
-  const createIcon = (url: string, type: 'main' | 'small' = 'small') =>
-    L.icon({
+  const createIcon = (url: string, type: 'main' | 'small' = 'small') => {
+    if (type === 'main') {
+      return L.icon({
+        iconUrl: url,
+        iconSize: [55, 48], // scaled to maintain original ratio
+        iconAnchor: [27, 48], // roughly center bottom
+        className: 'image-marker',
+      })
+    }
+
+    // small markers remain square
+    return L.icon({
       iconUrl: url,
-      iconSize: type === 'main' ? [42, 42] : [20, 20],
-      iconAnchor: type === 'main' ? [16, 32] : [15, 15],
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
       className: 'image-marker',
     })
+  }
 
   return (
     <MapContainer
