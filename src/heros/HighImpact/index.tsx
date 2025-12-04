@@ -57,7 +57,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
         <div>
           {richText && (
             <RichText
-              className="mb-6 text-white prose-hero"
+              className="mb-6 text-white prose-hero prose-headings:text-white"
               content={richText}
               enableGutter={false}
             />
