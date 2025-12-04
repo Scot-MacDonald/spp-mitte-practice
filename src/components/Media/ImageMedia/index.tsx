@@ -29,18 +29,19 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   // Pull from Payload media if available
   if (!src && resource && typeof resource === 'object') {
     const { alt: resourceAlt, height: fullHeight, url, width: fullWidth } = resource
-    width = fullWidth!
-    height = fullHeight!
-    alt = resourceAlt
+    width = fullWidth ?? undefined
+    height = fullHeight ?? undefined
+    alt = resourceAlt || alt
     src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
   }
 
-  // Default sizes: hero = full width viewport
-  const sizes = sizeFromProps || '100vw'
+  const sizes = sizeFromProps || '(max-width: 768px) 100vw, 1200px'
+  const imageQuality = priority ? 70 : 55
+  const finalAlt = alt || 'Image'
 
   return (
     <NextImage
-      alt={alt || ''}
+      alt={finalAlt}
       className={cn(imgClassName)}
       fill={fill}
       width={!fill ? width : undefined}
@@ -49,7 +50,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       sizes={sizes}
       priority={priority}
       fetchPriority={fetchPriority}
-      quality={60} // Optimized for performance
+      quality={imageQuality}
       onClick={onClick}
       onLoad={onLoadFromProps}
     />
