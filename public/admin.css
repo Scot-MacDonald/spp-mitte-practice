@@ -1,0 +1,13 @@
+/* Hide the default Payload logo */
+.login__brand {
+  display: none !important;
+}
+
+/* Optional: add your own logo above the login form */
+.login__form::before {
+  content: url('/spp_logo.png');
+  display: block;
+  margin: 0 auto 2rem;
+  width: 200px;
+  height: auto;
+}

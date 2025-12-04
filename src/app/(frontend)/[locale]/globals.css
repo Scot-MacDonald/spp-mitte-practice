@@ -305,3 +305,11 @@ html[data-theme='light'] {
   color: #000000;
   max-width: 100%;
 }
+
+.login__brand {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: calc(var(--base) * 2);
+  display: none !important;
+}

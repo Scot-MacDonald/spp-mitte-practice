@@ -40,7 +40,7 @@ import { Page, Post } from 'src/payload-types'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 import localization from './i18n/localization'
-
+import CustomLogin from '@/components/CustomLogin'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 const filename = fileURLToPath(import.meta.url)
@@ -61,7 +61,7 @@ export default buildConfig({
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
-      // beforeLogin: ['@/components/BeforeLogin'],
+      beforeLogin: ['@/components/BeforeLogin'],
       // The `AfterDashboard` component renders "Seed" that you see after logging into your admin panel.
       // afterDashboard: ['@/components/AfterDashboard'],
     },
