@@ -39,7 +39,7 @@ export default function MitgliedBlock({ title, description, items }) {
               className="w-24 h-28  rounded-lg object-cover"
             />
             <img
-              src="/api/media/file/daig_dagnae_siegel.webp"
+              src="/api/media/file/daig_dagnae_siegel_200x168.webp"
               alt="Image 2"
               className="w-26 h-24  rounded-lg object-cover"
             />
