@@ -35,8 +35,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   }, [setHeaderTheme, mediaDay, mediaNight])
 
   return (
-    <div className="relative w-full h-screen text-white" data-theme="dark">
-      {/* Hero content */}
+    <div className="relative flex items-end text-white">
+      {/* Content */}
       <div className="container-full pl-4 md:pl-8 mb-8 z-10 relative max-w-[44rem]">
         {richText && (
           <RichText
@@ -57,19 +57,21 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       </div>
 
       {/* Hero image */}
-      {currentMedia && (
-        <>
-          <Media
-            fill
-            priority
-            fetchPriority="high"
-            size="100vw"
-            imgClassName="object-cover -z-10 transition-opacity duration-1000"
-            resource={currentMedia}
-          />
-          <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
-        </>
-      )}
+      <div className="relative min-h-[60vh] mt-14 select-none w-full">
+        {currentMedia && (
+          <>
+            <Media
+              fill
+              priority
+              fetchPriority="high"
+              size="100vw"
+              imgClassName="object-cover -z-10 transition-opacity duration-1000"
+              resource={currentMedia}
+            />
+            <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
+          </>
+        )}
+      </div>
     </div>
   )
 }
