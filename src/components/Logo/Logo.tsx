@@ -1,3 +1,4 @@
+// src/components/Logo/Logo.tsx
 import clsx from 'clsx'
 import React from 'react'
 
@@ -9,8 +10,6 @@ interface Props {
 
 export const Logo = (props: Props) => {
   const { loading: loadingFromProps, priority: priorityFromProps, className } = props
-
-  // Set default to eager + high priority for header logo
   const loading = loadingFromProps || 'eager'
   const priority = priorityFromProps || 'high'
 
@@ -22,7 +21,7 @@ export const Logo = (props: Props) => {
         height={54}
         loading={loading}
         fetchPriority={priority}
-        decoding="auto" // change from async to auto for immediate decoding
+        decoding="auto"
         className="h-[54px] w-auto object-contain mr-2"
         src="/api/media/file/spp_logo.png"
       />
@@ -30,3 +29,6 @@ export const Logo = (props: Props) => {
     </div>
   )
 }
+
+// Add this line:
+export default Logo
