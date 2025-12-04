@@ -1,4 +1,3 @@
-// src/components/Logo/Logo.tsx
 import clsx from 'clsx'
 import React from 'react'
 
@@ -10,10 +9,13 @@ interface Props {
 
 export const Logo = (props: Props) => {
   const { loading: loadingFromProps, priority: priorityFromProps, className } = props
-  const loading = loadingFromProps || 'eager'
-  const priority = priorityFromProps || 'high'
+
+  const loading = loadingFromProps || 'lazy'
+  const priority = priorityFromProps || 'low'
 
   return (
+    /* eslint-disable @next/next/no-img-element */
+
     <div className={clsx('flex items-center', className)}>
       <img
         alt="SPP-Mitte Logo"
@@ -21,7 +23,7 @@ export const Logo = (props: Props) => {
         height={54}
         loading={loading}
         fetchPriority={priority}
-        decoding="auto"
+        decoding="async"
         className="h-[54px] w-auto object-contain mr-2"
         src="/api/media/file/spp_logo.png"
       />
@@ -29,6 +31,3 @@ export const Logo = (props: Props) => {
     </div>
   )
 }
-
-// Add this line:
-export default Logo
