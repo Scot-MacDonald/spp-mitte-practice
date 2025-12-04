@@ -26,7 +26,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   let alt = altFromProps
   let src: StaticImageData | string = srcFromProps || ''
 
-  // Pull from Payload resource if available
+  // Pull from Payload media if available
   if (!src && resource && typeof resource === 'object') {
     const { alt: resourceAlt, height: fullHeight, url, width: fullWidth } = resource
     width = fullWidth!
@@ -49,7 +49,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       sizes={sizes}
       priority={priority}
       fetchPriority={fetchPriority}
-      quality={70} // Optimized: good visual quality but smaller file
+      quality={70} // Optimized for performance
       onClick={onClick}
       onLoad={onLoadFromProps}
     />

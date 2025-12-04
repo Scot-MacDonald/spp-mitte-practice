@@ -36,7 +36,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 
   return (
     <div className="relative flex items-end text-white">
-      {/* Content */}
+      {/* Hero Content */}
       <div className="container-full pl-4 md:pl-8 mb-8 z-10 relative max-w-[44rem]">
         {richText && (
           <RichText
@@ -56,7 +56,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
         )}
       </div>
 
-      {/* Hero image */}
+      {/* Hero Image */}
       <div className="relative min-h-[60vh] mt-14 select-none w-full">
         {currentMedia && (
           <>
@@ -68,6 +68,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
               imgClassName="object-cover -z-10 transition-opacity duration-1000"
               resource={currentMedia}
             />
+            {/* Gradient overlay */}
             <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
           </>
         )}
