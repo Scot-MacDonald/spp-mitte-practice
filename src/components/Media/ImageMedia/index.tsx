@@ -49,7 +49,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       sizes={sizes}
       priority={priority}
       fetchPriority={fetchPriority}
-      quality={70} // Optimized for performance
+      quality={60} // Optimized for performance
       onClick={onClick}
       onLoad={onLoadFromProps}
     />
