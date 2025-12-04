@@ -35,43 +35,43 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   }, [setHeaderTheme, mediaDay, mediaNight])
 
   return (
-    <div className="relative flex items-end text-white">
-      {/* Hero Content */}
-      <div className="container-full pl-4 md:pl-8 mb-8 z-10 relative max-w-[44rem]">
-        {richText && (
-          <RichText
-            className="mb-6 text-white prose-hero"
-            content={richText}
-            enableGutter={false}
-          />
-        )}
-        {Array.isArray(links) && links.length > 0 && (
-          <ul className="flex gap-4">
-            {links.map(({ link }, i) => (
-              <li key={i}>
-                <CMSLink {...link} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
+    <div className="relative w-full min-h-[60vh] select-none">
       {/* Hero Image */}
-      <div className="relative min-h-[60vh] mt-14 select-none w-full">
-        {currentMedia && (
-          <>
-            <Media
-              fill
-              priority
-              fetchPriority="high"
-              size="100vw"
-              imgClassName="object-cover -z-10 transition-opacity duration-1000"
-              resource={currentMedia}
+      {currentMedia && (
+        <>
+          <Media
+            fill
+            priority
+            fetchPriority="high"
+            size="100vw"
+            imgClassName="object-cover -z-10 transition-opacity duration-1000"
+            resource={currentMedia}
+          />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-black to-transparent pointer-events-none" />
+        </>
+      )}
+
+      {/* Hero Content overlay */}
+      <div className="absolute top-0 left-0 w-full h-full flex items-end pl-4 md:pl-8 pb-8 z-10 max-w-[44rem]">
+        <div>
+          {richText && (
+            <RichText
+              className="mb-6 text-white prose-hero"
+              content={richText}
+              enableGutter={false}
             />
-            {/* Gradient overlay */}
-            <div className="absolute pointer-events-none left-0 bottom-0 w-full h-3/4 bg-gradient-to-t from-black to-transparent" />
-          </>
-        )}
+          )}
+          {Array.isArray(links) && links.length > 0 && (
+            <ul className="flex gap-4">
+              {links.map(({ link }, i) => (
+                <li key={i}>
+                  <CMSLink {...link} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   )
