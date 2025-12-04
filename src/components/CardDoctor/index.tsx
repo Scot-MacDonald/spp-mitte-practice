@@ -3,6 +3,7 @@
 import { cn } from 'src/utilities/cn'
 import React, { Fragment } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Doctor } from '@/payload-types'
 import { Media } from '@/components/Media'
 
@@ -46,19 +47,18 @@ export const CardDoctor: React.FC<{
   const imageUrl = getMediaUrl(metaImage)
 
   return (
-    // ensure the link itself is full height so the grid's items-stretch works
     <Link href={href} className={cn('block h-full', className)}>
-      {/* article is a full-height column so we can flex-grow the content area */}
       <article className="h-full flex flex-col border border-border rounded-lg p-4 transition-colors hover:bg-[rgba(126,179,106,0.1);]">
-        {/* image area stays fixed aspect ratio */}
         <div className="relative w-full aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
           {!metaImage && <div className="text-sm text-gray-500">No image</div>}
 
           {imageUrl && (
-            <img
+            <Image
               src={imageUrl}
               alt={titleToUse || 'Doctor image'}
-              className="object-cover w-full h-full"
+              fill
+              sizes="(max-width: 768px) 100vw, 340px"
+              className="object-cover"
             />
           )}
 
@@ -67,7 +67,6 @@ export const CardDoctor: React.FC<{
           )}
         </div>
 
-        {/* content: allow this section to grow to fill available height */}
         <div className="py-4 flex flex-col flex-grow">
           {showCategories && categories && categories.length > 0 && (
             <div className="uppercase text-sm mb-4 text-gray-500">
@@ -82,10 +81,7 @@ export const CardDoctor: React.FC<{
 
           {titleToUse && <h3 className="text-base font-bold text-gray-700">{titleToUse}</h3>}
 
-          {description && (
-            // make description push to bottom if needed
-            <p className="mt-1 text-sm text-gray-600 flex-grow">{description}</p>
-          )}
+          {description && <p className="mt-1 text-sm text-gray-600 flex-grow">{description}</p>}
         </div>
       </article>
     </Link>
