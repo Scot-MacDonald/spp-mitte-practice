@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .login__brand {
+    display: none !important;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: calc(var(--base) * 2);
+  }
+
+  .graphic-logo {
+    display: none !important;
+  }
+}

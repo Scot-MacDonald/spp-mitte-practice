@@ -5,6 +5,7 @@ export default {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    './src/payload/admin/**/*.{js,jsx,ts,tsx,css}',
   ],
   darkMode: ['selector', '[data-theme="dark"]'],
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
@@ -46,6 +47,15 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      login__brand: {
+        display: 'none !important',
+        justifyContent: 'center',
+        width: '100%',
+        marginBottom: 'calc(var(--base) * 2)',
+      },
+      graphicLogo: {
+        display: 'none !important',
       },
       borderRadius: {
         lg: 'var(--radius)',
