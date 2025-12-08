@@ -74,7 +74,7 @@ export const OpeningHours = () => {
                 {morning && <span className={cn(isMorningNow && 'text-[#7eb36a]')}>{morning}</span>}
               </p>
 
-              <p className="w-1/3 text-[1rem] text-right">
+              <p className="w-1/3 text-[1rem] text-left sm:text-right">
                 {afternoon && (
                   <span className={cn(isAfternoonNow && 'text-[#7eb36a]')}>{afternoon}</span>
                 )}
