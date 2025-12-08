@@ -192,7 +192,7 @@ export default {
               },
             },
             a: {
-              color: 'white',
+              color: 'white !important',
               textDecoration: 'underline', // optional
             },
           },
