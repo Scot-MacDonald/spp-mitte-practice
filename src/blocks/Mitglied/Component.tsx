@@ -35,12 +35,12 @@ export default function MitgliedBlock({ title, description, items }) {
           <div className="flex gap-4 items-center mt-6">
             <img
               src="/api/media/file/hepatologie26.webp"
-              alt="Image 1"
+              alt="hepatologie26"
               className="w-24 h-28  rounded-lg object-cover"
             />
             <img
               src="/api/media/file/daig_dagnae_siegel_200x168.webp"
-              alt="Image 2"
+              alt="daig_dagnae_siegel"
               className="w-26 h-24  rounded-lg object-cover"
             />
           </div>

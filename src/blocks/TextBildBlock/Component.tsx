@@ -43,7 +43,7 @@ export const TextBildBlock: React.FC<Props> = ({ title, richText, image, classNa
   return (
     <div className={className}>
       {/* Title */}
-      <div className="page-with-header mb-[70px] sm:mb-[14px]">
+      <div className="page-with-header mb-[70px] md:mb-[14px]">
         {pathname === '/' ? (
           <h2 className="page-header px-4 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center gap-2">
             {title}

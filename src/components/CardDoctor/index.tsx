@@ -48,7 +48,7 @@ export const CardDoctor: React.FC<{
 
   return (
     <Link href={href} className={cn('block h-full', className)}>
-      <article className="h-full flex flex-col border border-border rounded-lg p-4 transition-colors hover:bg-[rgba(126,179,106,0.1);]">
+      <article className="h-full flex flex-col border rounded-lg p-4 transition-colors hover:bg-[rgba(126,179,106,0.1);]">
         <div className="relative w-full aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
           {!metaImage && <div className="text-sm text-gray-500">No image</div>}
 
