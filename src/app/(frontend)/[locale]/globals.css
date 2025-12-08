@@ -20,9 +20,12 @@ strong {
   color: #111827 !important;
 }
 
+/* Apply correct bold weight and color inside prose */
 .prose b,
-.prose strong {
-  font-weight: 700 !important;
+.prose strong,
+.rich-text b,
+.rich-text strong {
+  font-weight: 600 !important; /* semi-bold */
   font-family: 'Geist Sans', sans-serif !important;
   color: #111827 !important;
 }
