@@ -44,6 +44,10 @@ strong {
   color: white !important; /* if you have <strong> inside <a> */
 }
 
+.border-border {
+  border-color: hsl(240, 6%, 90%); /* light gray */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

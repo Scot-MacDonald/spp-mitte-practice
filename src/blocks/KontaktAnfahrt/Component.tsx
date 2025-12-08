@@ -47,7 +47,7 @@ export default function KontaktAnfahrtBlock({
       case 's-bahn':
         return secondIconUrl || '/media/S-Bahn-Logo.webp'
       case 'u-bahn':
-        return thirdIconUrl || '/media/U-Bahn.svg'
+        return thirdIconUrl || '/media/U-Bahn.webp'
       case 'tram':
         return fifthIconUrl || '/media/Tram-Logo.svg'
       case 'bus':
