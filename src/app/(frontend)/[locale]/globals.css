@@ -31,7 +31,7 @@ strong {
 }
 
 .prose a {
-  color: white !important;
+  color: black !important;
   text-decoration: underline; /* optional */
 }
 
