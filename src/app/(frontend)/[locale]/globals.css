@@ -30,6 +30,11 @@ strong {
   color: #111827 !important;
 }
 
+.prose a {
+  color: white !important;
+  text-decoration: underline; /* optional */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
