@@ -35,6 +35,15 @@ strong {
   text-decoration: underline; /* optional */
 }
 
+.prose-hero a {
+  color: white !important;
+  text-decoration: underline; /* optional */
+}
+
+.prose-hero a strong {
+  color: white !important; /* if you have <strong> inside <a> */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
