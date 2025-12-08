@@ -191,6 +191,10 @@ export default {
                 fontSize: '1rem', // smaller on sm and below
               },
             },
+            a: {
+              color: 'white',
+              textDecoration: 'underline', // optional
+            },
           },
         },
       }),
