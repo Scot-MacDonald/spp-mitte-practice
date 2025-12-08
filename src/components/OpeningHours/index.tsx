@@ -47,7 +47,7 @@ export const OpeningHours = () => {
   const isOpenNow = today ? today.times.some((range) => isTimeInRange(range, now)) : false
 
   return (
-    <div className="opening-hours pr-[49px]">
+    <div className="opening-hours pr-0 md:pr-[49px]">
       {/* <h2
         className={cn(
           "text-xs font-normal mb-4",
@@ -74,7 +74,7 @@ export const OpeningHours = () => {
                 {morning && <span className={cn(isMorningNow && 'text-[#7eb36a]')}>{morning}</span>}
               </p>
 
-              <p className="w-1/3 text-[1rem] text-left sm:text-right">
+              <p className="w-1/3 text-[1rem] text-right">
                 {afternoon && (
                   <span className={cn(isAfternoonNow && 'text-[#7eb36a]')}>{afternoon}</span>
                 )}
