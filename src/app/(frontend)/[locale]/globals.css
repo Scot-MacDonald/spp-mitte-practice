@@ -17,12 +17,14 @@ body {
 b,
 strong {
   font-weight: 700 !important;
+  color: #111827 !important;
 }
 
 .prose b,
 .prose strong {
   font-weight: 700 !important;
   font-family: 'Geist Sans', sans-serif !important;
+  color: #111827 !important;
 }
 
 @tailwind base;
