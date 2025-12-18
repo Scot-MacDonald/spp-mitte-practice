@@ -101,8 +101,10 @@ export default buildConfig({
   plugins: [
     redirectsPlugin({
       collections: ['pages', 'posts', 'doctors'],
-      hooks: {
-        afterChange: [revalidateRedirects],
+      overrides: {
+        hooks: {
+          afterChange: [revalidateRedirects],
+        },
       },
     }),
 
