@@ -57,6 +57,8 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 }
 
 export default buildConfig({
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+
   admin: {
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.

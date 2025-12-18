@@ -6,7 +6,7 @@ services:
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
-      - pnpm_store:/home/node/.pnpm-store 
+      - pnpm_store:/home/node/.pnpm-store
     working_dir: /home/node/app/
     command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
     depends_on:
@@ -28,4 +28,4 @@ services:
 volumes:
   data:
   node_modules:
-  pnpm_store: 
+  pnpm_store:
