@@ -29,10 +29,14 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   // Pull from Payload media if available
   if (!src && resource && typeof resource === 'object') {
     const { alt: resourceAlt, height: fullHeight, url, width: fullWidth } = resource
+
     width = fullWidth ?? undefined
     height = fullHeight ?? undefined
     alt = resourceAlt || alt
-    src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
+
+    if (url) {
+      src = url
+    }
   }
 
   const sizes = sizeFromProps || '(max-width: 768px) 100vw, 1200px'
