@@ -2,11 +2,8 @@
 
 import dynamic from 'next/dynamic'
 import React from 'react'
-import RichText from '@/components/RichText' // Adjust path as needed
-import L, { LatLngExpression } from 'leaflet'
-import 'leaflet/dist/leaflet.css'
+import RichText from '@/components/RichText'
 
-// Dynamically import Map to avoid SSR issues
 const Map = dynamic(() => import('./Map'), { ssr: false })
 
 type TransportType = 'u-bahn' | 's-bahn' | 'tram' | 'bus' | 'other'
@@ -51,7 +48,7 @@ export default function KontaktAnfahrtBlock({
       case 'tram':
         return fifthIconUrl || '/media/Tram-Logo.svg'
       case 'bus':
-        return sixthIconUrl || '/media/Bus-Logo.svg'
+        return sixthIconUrl || '/media/BUS-Logo-BVG.svg'
       default:
         return fourthIconUrl || '/media/spp_logo.png'
     }
@@ -93,6 +90,7 @@ export default function KontaktAnfahrtBlock({
                 />
                 <h2 className="text-xl font-bold">{transport.title}</h2>
               </div>
+
               {transport.lines.map((l, j) => (
                 <span key={j}>{l.line}</span>
               ))}
@@ -105,12 +103,12 @@ export default function KontaktAnfahrtBlock({
         <Map
           lat={lat}
           lng={lng}
-          //   mainIconUrl={fourthIconUrl || '/media/spp_logo.png'}
-          secondIconUrl={secondIconUrl}
-          thirdIconUrl={thirdIconUrl}
-          fourthIconUrl={fourthIconUrl}
-          fifthIconUrl={fifthIconUrl}
-          sixthIconUrl={sixthIconUrl}
+          mainIconUrl="/media/spp_logo.png"
+          secondIconUrl={secondIconUrl || '/media/S-Bahn-Logo.webp'}
+          thirdIconUrl={thirdIconUrl || '/media/U-Bahn.webp'}
+          fourthIconUrl={fourthIconUrl || '/media/spp_logo.png'}
+          fifthIconUrl={fifthIconUrl || '/media/Tram-Logo.svg'}
+          sixthIconUrl={sixthIconUrl || '/media/BUS-Logo-BVG.svg'}
           seventhIconUrl={seventhIconUrl}
         />
       </div>
