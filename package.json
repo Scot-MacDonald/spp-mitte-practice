@@ -26,7 +26,7 @@
     "@fontsource/geist-sans": "^5.2.5",
     "@payloadcms/db-mongodb": "latest",
     "@payloadcms/email-resend": "^3.1.0",
-    "@payloadcms/live-preview": "^3.64.0",
+    "@payloadcms/live-preview": "^3.63.0",
     "@payloadcms/live-preview-react": "latest",
     "@payloadcms/next": "^3.47.0",
     "@payloadcms/payload-cloud": "latest",

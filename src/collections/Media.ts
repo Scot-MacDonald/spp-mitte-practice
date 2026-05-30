@@ -42,7 +42,7 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    staticDir: '/app/public/media',
+    staticDir: process.env.NODE_ENV === 'production' ? '/app/public/media' : 'public/media',
   },
   hooks: {
     afterChange: [revalidateMedia],
