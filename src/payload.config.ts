@@ -50,15 +50,16 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 /* ---------------- CONFIG ---------------- */
 
 export default buildConfig({
-  /* ✅ CRITICAL: hardcoded public URL */
-  serverURL: 'https://schwerpunktpraxis-berlin-mitte.de',
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
 
-  /* ✅ CRITICAL: explicit CORS + CSRF */
   cors: [
+    'http://localhost:3000',
     'https://schwerpunktpraxis-berlin-mitte.de',
     'https://www.schwerpunktpraxis-berlin-mitte.de',
   ],
+
   csrf: [
+    'http://localhost:3000',
     'https://schwerpunktpraxis-berlin-mitte.de',
     'https://www.schwerpunktpraxis-berlin-mitte.de',
   ],
