@@ -11,3 +11,6 @@ node_modules
 public/media/
 dataDump/
 .vscode/settings.json
+
+# TypeScript build cache
+*.tsbuildinfo
