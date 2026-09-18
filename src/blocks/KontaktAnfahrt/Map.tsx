@@ -56,8 +56,8 @@ export default function Map({
         style={{ height: '550px', width: '100%', zIndex: 0 }}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution="&copy; <a href='https://carto.com/'>CARTO</a>"
+          url={`https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=${process.env.NEXT_PUBLIC_CARTO_API_KEY}`}
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
 
         <Marker position={center} icon={createIcon(mainIconUrl || '/media/spp_logo.png', 'main')}>
